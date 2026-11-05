@@ -45,6 +45,18 @@ bash deploy/deploy-wsl.sh
 2. 在 `.github/workflows/deploy.yml` 里确认 `BASEURL` 与实际域名一致。
 3. 推送 `master`/`main` 即自动构建发布。
 
+## DNS 配置（DNSPod / DNSHE）
+
+| 类型 | 主机记录 | 记录值 | 状态 |
+| --- | --- | --- | --- |
+| A | `@` | `185.199.108.153` | ✅ 已生效 |
+| A | `@` | `185.199.109.153` | ✅ 已生效 |
+| A | `@` | `185.199.110.153` | ✅ 已生效 |
+| A | `@` | `185.199.111.153` | ✅ 已生效 |
+| CNAME | `www` | `htten.github.io` | 可选（当前 www 仍指向旧地址 171.107.33.243） |
+
+GitHub Pages 仓库设置中 Pages → Custom domain = `htten.cc.cd`，HTTPS 已由 GitHub 自动签发。
+
 ## 网络说明
 
 本机（WSL 与 Windows）直连 `github.com` 会超时，Git 操作需走镜像：

@@ -2,7 +2,7 @@ baseURL = 'https://htten.cc.cd/'
 defaultContentLanguage = 'zh'
 title = 'HTTEN 的博客'
 enableGitInfo = true
-disablePathToLower = true
+disablePathToLower = false
 copyright = '© 2026 HTTEN · Powered by Hugo'
 
 # 无第三方主题：样式复刻自原 PHP 博客（Hallmark · Editorial），模板在 layouts/

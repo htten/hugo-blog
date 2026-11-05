@@ -1,0 +1,895 @@
+/* Hallmark · macrostructure: Editorial (hanging headings, single column, hairline dividers, outlined CTAs, inline images, fade-up reveal) · route: catalog · theme: editorial
+ * paper: oklch(97% 0.01 80) · ink: oklch(18% 0.01 60) · accent: oklch(55% 0.18 35) · display: Newsreader · body: Geist
+ * axes: hanging / single-column / hairline / outlined / inline / fade-up · gates: all-pass · studied: no
+ */
+
+/* ============================================================
+   1. Tokens — OKLCH palette + typography + spacing scale
+   ============================================================ */
+:root {
+    /* Paper & ink */
+    --color-paper:    oklch(97%  0.008 80);
+    --color-paper-2:  oklch(94%  0.010 80);
+    --color-rule:     oklch(86%  0.008 80);
+    --color-neutral:  oklch(58%  0.008 70);
+    --color-muted:    oklch(42%  0.008 60);
+    --color-ink:      oklch(18%  0.010 60);
+    --color-accent:   oklch(55%  0.18  35);   /* warm amber */
+    --color-accent-hover: oklch(48%  0.20  35);
+    --color-accent-light: oklch(95%  0.015 80);
+    --color-focus:    oklch(55%  0.19  55);
+
+    /* Typography */
+    --font-display: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
+    --font-body:    "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono:    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    /* Spacing — 4 px base */
+    --space-3xs: 4px;
+    --space-2xs: 8px;
+    --space-xs:  12px;
+    --space-sm:  16px;
+    --space-md:  24px;
+    --space-lg:  32px;
+    --space-xl:  48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+
+    /* Radii */
+    --radius-sm: 6px;
+    --radius:    12px;
+
+    /* Shadows — subtle, warm */
+    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+    --shadow-hover: 0 4px 6px rgba(0,0,0,0.04), 0 12px 24px rgba(0,0,0,0.08);
+
+    /* Measure */
+    --measure: 65ch;
+    --max-width: 1200px;
+}
+
+/* ============================================================
+   2. Reset & base
+   ============================================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--color-accent-hover);
+}
+
+/* Focus ring — universal */
+:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   3. Layout primitives
+   ============================================================ */
+.container {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-inline: var(--space-md);
+    }
+}
+
+/* ============================================================
+   4. Site header — Editorial masthead, not AI nav
+   ============================================================ */
+.site-header {
+    border-bottom: 1px solid var(--color-rule);
+    background: var(--color-paper);
+    padding-block: var(--space-md);
+}
+
+.site-header .container {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-md);
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-ink);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.logo:hover {
+    color: var(--color-accent);
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.main-nav a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-muted);
+    padding: var(--space-2xs) 0;
+    position: relative;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--color-ink);
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-accent);
+    transition: width 0.25s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+
+.nav-admin {
+    font-size: 13px;
+    font-weight: 600;
+    padding: var(--space-2xs) var(--space-sm);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink);
+}
+
+.nav-admin:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+.nav-admin::after {
+    display: none;
+}
+
+/* ============================================================
+   5. Hero — hanging, left-aligned, not full-viewport
+   ============================================================ */
+.hero {
+    padding-block: var(--space-3xl) var(--space-2xl);
+    border-bottom: 1px solid var(--color-rule);
+    background: var(--color-paper);
+}
+
+.hero .container {
+    max-width: var(--measure);
+}
+
+.hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: var(--space-md);
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-muted);
+    max-width: 55ch;
+}
+
+/* ============================================================
+   6. Content layout — single column + optional sidebar
+   ============================================================ */
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: var(--space-2xl);
+    padding-block: var(--space-2xl);
+}
+
+.main-content {
+    min-width: 0;
+}
+
+/* ============================================================
+   7. Post card — no side-stripe, no purple gradient
+   ============================================================ */
+.post-card {
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--color-rule);
+    transition: background 0.2s ease;
+}
+
+.post-card:last-child {
+    border-bottom: none;
+}
+
+.post-card:hover {
+    background: var(--color-paper-2);
+}
+
+.post-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-xs);
+}
+
+.post-title a {
+    color: var(--color-ink);
+}
+
+.post-title a:hover {
+    color: var(--color-accent);
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-bottom: var(--space-sm);
+}
+
+.meta-sep {
+    color: var(--color-rule);
+}
+
+.category-link {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: var(--color-accent-light);
+    padding: 2px var(--space-xs);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+}
+
+.post-excerpt {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-neutral);
+    margin-bottom: var(--space-sm);
+}
+
+.read-more {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.read-more:hover {
+    gap: 8px;
+}
+
+/* ============================================================
+   8. Pagination — outlined, not filled
+   ============================================================ */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding-block: var(--space-lg);
+    margin-top: var(--space-lg);
+    border-top: 1px solid var(--color-rule);
+}
+
+.page-link {
+    padding: var(--space-2xs) var(--space-md);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-ink);
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.page-link:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: var(--color-accent-light);
+}
+
+.page-info {
+    font-size: 14px;
+    color: var(--color-muted);
+    font-weight: 500;
+}
+
+/* ============================================================
+   9. Post detail — reading-focused
+   ============================================================ */
+.post-detail {
+    padding-block: var(--space-2xl);
+    border-bottom: 1px solid var(--color-rule);
+}
+
+.post-header {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-rule);
+}
+
+.post-detail .post-title {
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+}
+
+.post-content {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--color-ink);
+    max-width: var(--measure);
+}
+
+.post-content h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+.post-content h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+    line-height: 1.3;
+}
+
+.post-content p {
+    margin-bottom: var(--space-md);
+}
+
+.post-content ul,
+.post-content ol {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-lg);
+}
+
+.post-content li {
+    margin-bottom: var(--space-2xs);
+}
+
+.post-content code {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    background: var(--color-paper-2);
+    padding: 2px var(--space-2xs);
+    border-radius: var(--radius-sm);
+    color: var(--color-accent);
+}
+
+.post-content pre {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: var(--space-lg);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    margin: var(--space-lg) 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.post-content pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+}
+
+.post-content blockquote {
+    border-left: 2px solid var(--color-accent);
+    padding-left: var(--space-md);
+    margin: var(--space-lg) 0;
+    color: var(--color-muted);
+    font-style: italic;
+}
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    margin: var(--space-lg) 0;
+    display: block;
+}
+
+.post-content hr {
+    border: none;
+    border-top: 1px solid var(--color-rule);
+    margin: var(--space-2xl) 0;
+}
+
+/* Post tags */
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-rule);
+}
+
+.tag-item {
+    display: inline-block;
+    padding: var(--space-2xs) var(--space-sm);
+    background: var(--color-paper-2);
+    color: var(--color-muted);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid var(--color-rule);
+    transition: all 0.2s ease;
+}
+
+.tag-item:hover {
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+/* Post nav */
+.post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-rule);
+}
+
+.nav-link {
+    padding: var(--space-md);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-light);
+}
+
+.nav-label {
+    display: block;
+    font-size: 12px;
+    color: var(--color-muted);
+    margin-bottom: var(--space-2xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.nav-title {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.4;
+}
+
+/* ============================================================
+   10. Sidebar
+   ============================================================ */
+.sidebar {
+    position: sticky;
+    top: var(--space-lg);
+    height: fit-content;
+}
+
+.widget {
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-rule);
+}
+
+.widget:last-child {
+    border-bottom: none;
+}
+
+.widget-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    margin-bottom: var(--space-sm);
+}
+
+.category-list {
+    list-style: none;
+}
+
+.category-list li {
+    margin-bottom: var(--space-2xs);
+}
+
+.category-list a {
+    display: block;
+    padding: var(--space-2xs) 0;
+    font-size: 14px;
+    color: var(--color-neutral);
+    border-radius: var(--radius-sm);
+    transition: color 0.2s ease;
+}
+
+.category-list a:hover,
+.category-list a.active {
+    color: var(--color-accent);
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+}
+
+.tag-cloud .tag-item {
+    padding: 4px var(--space-sm);
+    background: transparent;
+    border: 1px solid var(--color-rule);
+    color: var(--color-neutral);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tag-cloud .tag-item:hover {
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+/* ============================================================
+   11. Page title (category / tag pages)
+   ============================================================ */
+.page-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-rule);
+    letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   12. Empty state
+   ============================================================ */
+.empty-state {
+    text-align: center;
+    padding: var(--space-3xl) var(--space-md);
+    color: var(--color-muted);
+}
+
+.empty-state p {
+    font-size: 16px;
+}
+
+/* ============================================================
+   13. Site footer — close the page, not catalogue links
+   ============================================================ */
+.site-footer {
+    border-top: 1px solid var(--color-rule);
+    padding-block: var(--space-xl);
+    margin-top: var(--space-2xl);
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 14px;
+}
+
+.site-footer .container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+}
+
+.site-footer a {
+    color: var(--color-neutral);
+}
+
+.site-footer a:hover {
+    color: var(--color-accent);
+}
+
+/* ============================================================
+   14. Links page
+   ============================================================ */
+.links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links-list li {
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-rule);
+}
+
+.links-list li:last-child {
+    border-bottom: none;
+}
+
+.links-list a {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-ink);
+}
+
+.links-list a:hover {
+    color: var(--color-accent);
+}
+
+.link-author {
+    font-size: 14px;
+    color: var(--color-muted);
+    margin-left: var(--space-2xs);
+}
+
+/* ============================================================
+   15. Animations — fade-up, reduced-motion aware
+   ============================================================ */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post-card {
+    animation: fadeUp 0.5s ease both;
+}
+
+.post-card:nth-child(1) { animation-delay: 0.05s; }
+.post-card:nth-child(2) { animation-delay: 0.1s; }
+.post-card:nth-child(3) { animation-delay: 0.15s; }
+.post-card:nth-child(4) { animation-delay: 0.2s; }
+.post-card:nth-child(5) { animation-delay: 0.25s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .post-card {
+        animation: none;
+    }
+}
+
+/* ============================================================
+   16. Responsive — mobile first, checked at 320 / 375 / 414 / 768
+   ============================================================ */
+@media (max-width: 768px) {
+    .hero {
+        padding-block: var(--space-2xl) var(--space-xl);
+    }
+
+    .content-wrapper {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+
+    .sidebar {
+        position: static;
+        order: 2;
+    }
+
+    .post-detail {
+        padding-block: var(--space-xl);
+    }
+
+    .post-detail .post-title {
+        font-size: 28px;
+    }
+
+    .post-card {
+        padding: var(--space-md) 0;
+    }
+
+    .post-title {
+        font-size: 20px;
+    }
+
+    .main-nav {
+        gap: var(--space-sm);
+    }
+
+    .post-nav {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 414px) {
+    .main-nav {
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+    }
+
+    .nav-admin {
+        width: 100%;
+        text-align: center;
+        margin-top: var(--space-2xs);
+    }
+}
+
+@media (max-width: 320px) {
+    .container {
+        padding-inline: var(--space-sm);
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .post-detail .post-title {
+        font-size: 24px;
+    }
+}
+
+
+/* ============================================================
+   17. Hugo 扩展（表格、目录、列表细节）
+   ============================================================ */
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-lg) 0;
+    font-size: 14px;
+    font-family: var(--font-body);
+}
+
+.post-content th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--color-ink);
+    background: var(--color-paper-2);
+    padding: var(--space-xs) var(--space-sm);
+    border-bottom: 1px solid var(--color-rule);
+}
+
+.post-content td {
+    padding: var(--space-xs) var(--space-sm);
+    border-bottom: 1px solid var(--color-rule);
+    vertical-align: top;
+}
+
+.post-content tbody tr:hover {
+    background: var(--color-paper-2);
+}
+
+.post-content h4 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+}
+
+.post-content ol {
+    padding-left: var(--space-lg);
+}
+
+.post-content li::marker {
+    color: var(--color-neutral);
+}
+
+.post-content li > p {
+    margin-bottom: var(--space-2xs);
+}
+
+.post-content strong {
+    font-weight: 700;
+    color: var(--color-ink);
+}
+
+.post-content a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+/* 目录 */
+.post-content .toc {
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+    margin-bottom: var(--space-xl);
+    background: var(--color-paper-2);
+}
+
+.post-content .toc ul {
+    list-style: none;
+    padding-left: var(--space-md);
+    margin-bottom: 0;
+}
+
+.post-content .toc > ul {
+    padding-left: 0;
+}
+
+.post-content .toc a {
+    text-decoration: none;
+}
+
+/* 归档列表 */
+.archive-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-rule);
+}
+
+.archive-item time {
+    font-size: 13px;
+    color: var(--color-neutral);
+    white-space: nowrap;
+    min-width: 96px;
+}
+
+.archive-item .post-title {
+    margin: 0;
+    font-size: 19px;
+}
+
+/* 页脚附加信息 */
+.site-footer .footer-links {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}

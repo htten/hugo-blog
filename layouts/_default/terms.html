@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <h1 class="page-title">{{ .Title }}</h1>
+
+  <div class="content-wrapper">
+    <div class="main-content">
+      {{ if not .Pages }}
+        <div class="empty-state"><p>暂无内容</p></div>
+      {{ else }}
+        {{ range .Pages.ByTitle }}
+          <div class="archive-item">
+            <time>{{ .Date.Format "2006-01-02" }}</time>
+            <h2 class="post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          </div>
+        {{ end }}
+      {{ end }}
+    </div>
+
+    {{ partial "sidebar.html" . }}
+  </div>
+{{ end }}

@@ -1,11 +1,11 @@
 baseURL = 'https://htten.cc.cd/'
 defaultContentLanguage = 'zh'
 title = 'HTTEN 的博客'
-theme = 'book'
 enableGitInfo = true
 disablePathToLower = true
 copyright = '© 2026 HTTEN · Powered by Hugo'
 
+# 无第三方主题：样式复刻自原 PHP 博客（Hallmark · Editorial），模板在 layouts/
 [languages]
   [languages.zh]
     languageName = '中文'
@@ -19,6 +19,9 @@ copyright = '© 2026 HTTEN · Powered by Hugo'
 [taxonomies]
   category = 'categories'
   tag = 'tags'
+
+[pagination]
+  pagerSize = 10
 
 [outputs]
   home = ['html', 'rss']
@@ -37,46 +40,9 @@ copyright = '© 2026 HTTEN · Powered by Hugo'
     startLevel = 2
     endLevel = 3
   [markup.highlight]
-    style = 'github'
+    style = 'base16-snazzy'
 
 [params]
   description = 'AI 应用、开发者工具、生产力哲学'
-  BookTheme = 'light'
-  BookToC = true
-  BookBreadcrumbs = false
-  BookSearch = true
-  BookSection = 'posts'
-  BookDateFormat = '2006-01-02'
-  BookRepo = 'https://github.com/htten/hugo-blog'
-  BookEditLink = '{{ .Site.Params.BookRepo }}/edit/main/content{{ .Path }}'
-  BookLastChangeLink = '{{ .Site.Params.BookRepo }}/commit/{{ .GitInfo.Hash }}'
-
-[[menu.before]]
-  name = '首页'
-  pageRef = '/'
-  weight = 10
-
-[[menu.before]]
-  name = '文章'
-  pageRef = '/posts'
-  weight = 20
-
-[[menu.after]]
-  name = '分类'
-  url = '/categories/'
-  weight = 10
-
-[[menu.after]]
-  name = '标签'
-  url = '/tags/'
-  weight = 20
-
-[[menu.after]]
-  name = '关于'
-  url = '/about/'
-  weight = 30
-
-[[menu.after]]
-  name = 'GitHub'
-  url = 'https://github.com/htten/hugo-blog'
-  weight = 40
+  author = 'HTTEN'
+  repo = 'https://github.com/htten/hugo-blog'

@@ -1,0 +1,41 @@
+{{- /* 从文章 front matter 直接收集分类/标签，保留原始大小写（Hugo 会把 taxonomy 名转小写） */ -}}
+{{- $cats := slice -}}
+{{- $tags := slice -}}
+{{- range site.RegularPages -}}
+  {{- range .Params.categories -}}
+    {{- if not (in $cats .) }}{{ $cats = $cats | append . }}{{ end -}}
+  {{- end -}}
+  {{- range .Params.tags -}}
+    {{- if not (in $tags .) }}{{ $tags = $tags | append . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- $cats = sort $cats -}}
+{{- $tags = sort $tags -}}
+
+<aside class="sidebar">
+    <div class="widget">
+        <h3 class="widget-title">分类</h3>
+        <ul class="category-list">
+            {{ $cur := "" }}
+            {{ if eq .Kind "term" }}{{ $cur = .Title }}{{ end }}
+            {{ range $cats }}
+                {{ $count := len (where site.RegularPages "Params.categories" "intersect" (slice .)) }}
+                <li>
+                    <a href="{{ "/categories/" | relURL }}{{ lower (. | urlize) }}/"{{ if eq . $cur }} class="active"{{ end }}>
+                        {{ . }}
+                        <span class="meta-sep">·</span> {{ $count }}
+                    </a>
+                </li>
+            {{ end }}
+        </ul>
+    </div>
+
+    <div class="widget">
+        <h3 class="widget-title">标签</h3>
+        <div class="tag-cloud">
+            {{ range $tags }}
+                <a href="{{ "/tags/" | relURL }}{{ lower (. | urlize) }}/">{{ . }}</a>
+            {{ end }}
+        </div>
+    </div>
+</aside>

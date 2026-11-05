@@ -1,0 +1,41 @@
+{{ define "main" }}
+  {{ if .IsHome }}
+    <section class="hero">
+        <div class="container">
+            <h1>{{ site.Title }}</h1>
+            <p>{{ site.Params.description }}</p>
+        </div>
+    </section>
+  {{ else }}
+    <h1 class="page-title">{{ .Title }}</h1>
+  {{ end }}
+
+  <div class="content-wrapper">
+    <div class="main-content">
+      {{ $pages := .RegularPages }}
+      {{ if eq .Kind "home" }}
+        {{ $pages = where site.RegularPages "Section" "posts" }}
+      {{ else if eq .Kind "term" }}
+        {{ $pages = .Pages }}
+      {{ else if eq .Kind "taxonomy" }}
+        {{ $pages = .Pages }}
+      {{ else }}
+        {{ $pages = .RegularPages }}
+      {{ end }}
+
+      {{ if not $pages }}
+        <div class="empty-state">
+          <p>暂无文章</p>
+        </div>
+      {{ else }}
+        {{ range $index, $page := $pages }}
+          {{ partial "post-card.html" (dict "page" $page "index" $index) }}
+        {{ end }}
+
+        {{ partial "pagination.html" . }}
+      {{ end }}
+    </div>
+
+    {{ partial "sidebar.html" . }}
+  </div>
+{{ end }}

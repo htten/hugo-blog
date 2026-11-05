@@ -27,7 +27,15 @@ hugo --minify --gc -b https://htten.cc.cd/
 hugo server -D        # 本地预览 http://localhost:1313/
 ```
 
-## 自部署（WSL，nginx）
+## 部署方案（已定：A = GitHub Pages）
+
+**生产环境走 GitHub Pages**（A 记录 → GitHub Pages IP，Let's Encrypt 证书自动签发与续期，Pages 已开启 Enforce HTTPS，HTTP 自动 301 到 HTTPS）。
+
+仓库 `htten/hugo-blog` → push `main` → Actions 自动构建并发布，无需任何服务器操作。
+
+自部署（WSL nginx）保留为**备用/本机预览**手段：
+
+## 自部署（WSL，nginx，备用）
 
 ```bash
 sudo cp deploy/nginx.conf /etc/nginx/sites-available/blog-hugo

@@ -5,7 +5,7 @@ set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PUB_DIR="${PUB_DIR:-/var/www/blog/public}"
-BASE_URL="${1:-https://blog.htten.cc.cd/}"
+BASE_URL="${1:-https://htten.cc.cd/}"
 
 command -v hugo >/dev/null || { echo "hugo 未安装" >&2; exit 1; }
 
@@ -22,4 +22,4 @@ echo "==> reload nginx"
 sudo nginx -t
 sudo systemctl reload nginx
 
-echo "==> 完成：http://127.0.0.1/  （站点名 blog.htten.cc.cd）"
+echo "==> 完成：http://127.0.0.1/  （站点名 htten.cc.cd）"

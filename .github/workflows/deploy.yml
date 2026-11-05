@@ -17,7 +17,7 @@ concurrency:
 env:
   HUGO_VERSION: 0.154.5
   # 部署目标域名（GitHub Pages 自定义域名）
-  BASEURL: https://blog.htten.cc.cd/
+  BASEURL: https://htten.cc.cd/
 
 jobs:
   build:

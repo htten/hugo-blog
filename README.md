@@ -3,7 +3,7 @@
 从原自研 PHP 博客迁移到 Hugo 静态站，使用 [panr/hugo-theme-terminal](https://github.com/panr/hugo-theme-terminal) v4.2.6 主题（已 vendor 到 `themes/terminal`，无需 submodule）。
 
 - 站点名：我的博客
-- 域名：`https://blog.htten.cc.cd/`（GitHub Pages + 自建 nginx 双轨）
+- 域名：`https://htten.cc.cd/`（GitHub Pages + 自建 nginx 双轨）
 - 原 PHP 版本已归档在 `D:\phpblog`（含 `DEPLOY.md`、数据库导出 `blog-export-20261002/blog.sql`）
 
 ## 目录
@@ -23,7 +23,7 @@
 ## 本地构建
 
 ```bash
-hugo --minify --gc -b https://blog.htten.cc.cd/
+hugo --minify --gc -b https://htten.cc.cd/
 hugo server -D        # 本地预览 http://localhost:1313/
 ```
 

@@ -1,4 +1,4 @@
-baseURL = 'https://blog.htten.cc.cd/'
+baseURL = 'https://htten.cc.cd/'
 languageCode = 'zh-cn'
 title = 'HTTEN 的博客'
 contentDir = 'content'

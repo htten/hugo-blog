@@ -1,6 +1,10 @@
 # 博客（Hugo 静态站）
 
-从原自研 PHP 博客迁移到 Hugo 静态站，使用 [panr/hugo-theme-terminal](https://github.com/panr/hugo-theme-terminal) v4.2.6 主题（已 vendor 到 `themes/terminal`，无需 submodule）。
+从原自研 PHP 博客迁移到 Hugo 静态站，使用 [alex-shpak/hugo-book](https://github.com/alex-shpak/hugo-book) 主题（已 vendor 到 `themes/book`，无需 submodule）。
+
+**版式：宽幅 + 浅蓝**——正文宽度 `78rem`（≈1248px）、整页浅蓝渐变背景、卡片化首页与文章列表、浅色代码高亮。定制全部集中在 `assets/styles/custom.css`。
+
+> 主题要求 **Hugo ≥ 0.158**（用到 `langs.Language.Locale`）。CI 使用 `0.169.0`；本地若 `hugo` 版本过旧，`deploy/deploy-wsl.sh` 会自动改用 `/mnt/d/src/bin/hugo`（自编译 0.170.0-DEV）。
 
 - 站点名：我的博客
 - 域名：`https://htten.cc.cd/`（GitHub Pages + 自建 nginx 双轨）
@@ -10,9 +14,12 @@
 
 | 路径 | 说明 |
 | --- | --- |
-| `content/posts/` | 文章（Markdown，front matter 用 `title` / `date` / `slug`） |
+| `content/posts/` | 文章（Markdown，front matter 用 `title` / `date` / `description` / `categories` / `tags`） |
 | `layouts/` | 覆盖主题的模板（首页、文章列表） |
-| `themes/terminal/` | 已 vendor 的终端主题 |
+| `themes/book/` | 已 vendor 的 hugo-book 主题 |
+| `assets/styles/custom.css` | 宽幅浅蓝定制（宽度、配色、卡片、代码块） |
+| `layouts/index.html` | 自定义首页（Hero + 文章卡片网格） |
+| `layouts/_partials/docs/html-head-title.html` | 自定义 `<title>`（首页不重复标题） |
 | `static/uploads/` | 从 PHP 博客迁移的图片 |
 | `deploy/nginx.conf` | 自部署用 nginx 站点配置 |
 | `deploy/deploy-wsl.sh` | WSL 上构建 + 发布到 `/var/www/blog/public` + reload nginx |

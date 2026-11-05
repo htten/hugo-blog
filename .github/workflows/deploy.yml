@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  HUGO_VERSION: 0.154.5
+  HUGO_VERSION: 0.169.0
   # 部署目标域名（GitHub Pages 自定义域名）
   BASEURL: https://htten.cc.cd/
 

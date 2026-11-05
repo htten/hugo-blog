@@ -1,0 +1,226 @@
+/* ==========================================================================
+   站点定制：宽幅版式 + 浅蓝配色
+   主题：hugo-book（变量定义见 assets/styles/variables.css 与 themes.css）
+   ========================================================================== */
+
+:root {
+  /* ---- 版式：加宽 ---- */
+  --font-size: 108%;
+  --content-max-width: 70rem; /* 正文阅读宽度 ≈ 1120px */
+  --layout-max-width: 100rem;
+  --menu-width: 16rem;
+  --toc-width: 17rem;
+  --body-min-width: 22rem;
+
+  /* ---- 配色：浅蓝 ---- */
+  --body-background: #f8fbff;
+  --body-background-tint: linear-gradient(180deg, #e6f1ff 0px, #f2f8ff 220px, #f8fbff 520px);
+  --body-font-color: #1e2b3a;
+
+  --color-link: #1a73e8;
+  --color-visited-link: #7b4fd8;
+
+  --gray-100: #eaf2fd;
+  --gray-200: #d6e5f9;
+  --gray-500: #8fa6c2;
+
+  --color-accent-default: #5b7fa6;
+  --color-accent-note: #3b8eea;
+  --color-accent-tip: #2fa36b;
+  --color-accent-important: #7b4fd8;
+  --color-accent-warning: #e08a2b;
+  --color-accent-caution: #d9534f;
+
+  --border-radius: 8px;
+}
+
+/* 侧边栏：淡蓝玻璃感底 */
+.book-menu .book-menu-content {
+  background: linear-gradient(180deg, rgba(233, 243, 255, 0.92), rgba(248, 251, 255, 0.86));
+  backdrop-filter: saturate(140%) blur(6px);
+  border-right: 1px solid var(--gray-200);
+}
+
+.book-brand {
+  color: #14406f;
+  letter-spacing: 0.02em;
+}
+
+.book-brand a[href] {
+  color: #14406f;
+}
+
+.book-menu a.active {
+  color: var(--color-link);
+  font-weight: 600;
+}
+
+/* 右侧目录 */
+.book-toc .book-toc-content {
+  background: linear-gradient(180deg, rgba(233, 243, 255, 0.75), rgba(248, 251, 255, 0.6));
+  border-left: 1px solid var(--gray-200);
+}
+
+/* 正文标题配色 */
+.book-page h1,
+.book-page h2,
+.book-page h3,
+.book-page h4 {
+  color: #10314f;
+}
+
+.book-page h1 {
+  border-bottom: 2px solid var(--gray-200);
+  padding-bottom: 0.4rem;
+}
+
+.book-page h2 {
+  border-bottom: 1px dashed var(--gray-200);
+  padding-bottom: 0.25rem;
+}
+
+/* 引用块：浅蓝底 */
+.book-page blockquote {
+  background: var(--gray-100);
+  border-left: 4px solid #7fb4f0;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  padding: 0.6rem 1rem;
+  margin: 1.2rem 0;
+}
+
+.book-page blockquote > p:last-child {
+  margin-bottom: 0;
+}
+
+/* 代码块 */
+.book-page pre {
+  background: #f2f7fd;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius);
+}
+
+.book-page code {
+  color: #14538c;
+}
+
+.book-page pre code {
+  color: inherit;
+}
+
+/* 表格 */
+.book-page table {
+  border-color: var(--gray-200);
+}
+
+.book-page thead th {
+  background: var(--gray-100);
+  color: #10314f;
+}
+
+/* 首页文章卡片 */
+.home-hero {
+  padding: 2.2rem 2.4rem;
+  margin-bottom: 1.8rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #e8f2ff 0%, #f6fbff 60%, #ffffff 100%);
+  border: 1px solid var(--gray-200);
+  box-shadow: 0 6px 24px rgba(31, 111, 235, 0.08);
+}
+
+.home-hero h1 {
+  margin: 0 0 0.4rem;
+  font-size: 2rem;
+  border: 0;
+  padding: 0;
+  color: #0f3c6b;
+}
+
+.home-hero p {
+  margin: 0;
+  color: #47607d;
+  font-size: 1.02rem;
+}
+
+.home-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.1rem;
+}
+
+.home-post {
+  display: block;
+  padding: 1.2rem 1.4rem;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid var(--gray-200);
+  box-shadow: 0 2px 10px rgba(31, 111, 235, 0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  color: inherit;
+}
+
+.home-post:hover {
+  transform: translateY(-2px);
+  border-color: #a8cbf2;
+  box-shadow: 0 8px 22px rgba(31, 111, 235, 0.12);
+}
+
+.home-post h3 {
+  margin: 0.3rem 0 0.5rem;
+  font-size: 1.16rem;
+  line-height: 1.45;
+  border: 0;
+  padding: 0;
+}
+
+.home-post h3 a {
+  color: #14406f;
+}
+
+.home-post p {
+  margin: 0 0 0.7rem;
+  color: #4a627c;
+  font-size: 0.95rem;
+}
+
+.home-post .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  font-size: 0.82rem;
+  color: #7b90a8;
+}
+
+.home-post .meta a {
+  color: var(--color-link);
+}
+
+/* 文章列表页的卡片化 */
+.book-post {
+  background: #ffffff;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  box-shadow: 0 2px 8px rgba(31, 111, 235, 0.04);
+}
+
+.book-post h2 {
+  border: 0;
+  padding: 0;
+}
+
+.book-post h2 a {
+  color: #14406f;
+}
+
+/* 搜索框 */
+.book-search input {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius);
+  background: #ffffff;
+}
+
+/* 页脚 */
+.book-footer {
+  border-top: 1px solid var(--gray-200);
+  color: #7b90a8;
+}

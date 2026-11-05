@@ -1,13 +1,82 @@
 baseURL = 'https://htten.cc.cd/'
-languageCode = 'zh-cn'
+defaultContentLanguage = 'zh'
 title = 'HTTEN 的博客'
-contentDir = 'content'
-defaultContentLanguage = 'zh-cn'
-theme = 'terminal'
+theme = 'book'
+enableGitInfo = true
+disablePathToLower = true
+copyright = '© 2026 HTTEN · Powered by Hugo'
+
+[languages]
+  [languages.zh]
+    languageName = '中文'
+    languageCode = 'zh-CN'
+    contentDir = 'content'
+    weight = 1
+    title = 'HTTEN 的博客'
+    [languages.zh.params]
+      description = 'AI 应用、开发者工具、生产力哲学'
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+
+[outputs]
+  home = ['html', 'rss']
+  section = ['html', 'rss']
+  taxonomy = ['html', 'rss']
+  term = ['html', 'rss']
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.goldmark.parser]
+    [markup.goldmark.parser.attribute]
+      block = true
+      title = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+  [markup.highlight]
+    style = 'base16-snazzy'
 
 [params]
   description = 'AI 应用、开发者工具、生产力哲学'
-  themeVersion = 'v4.2.6'
-  mainSections = ['posts']
-  disableThemeToggle = true
-  disableScrollToTop = false
+  BookTheme = 'light'
+  BookToC = true
+  BookBreadcrumbs = false
+  BookSearch = true
+  BookSection = 'posts'
+  BookDateFormat = '2006-01-02'
+  BookRepo = 'https://github.com/htten/hugo-blog'
+  BookEditLink = '{{ .Site.Params.BookRepo }}/edit/main/content{{ .Path }}'
+  BookLastChangeLink = '{{ .Site.Params.BookRepo }}/commit/{{ .GitInfo.Hash }}'
+
+[[menu.before]]
+  name = '首页'
+  pageRef = '/'
+  weight = 10
+
+[[menu.before]]
+  name = '文章'
+  pageRef = '/posts'
+  weight = 20
+
+[[menu.after]]
+  name = '分类'
+  url = '/categories/'
+  weight = 10
+
+[[menu.after]]
+  name = '标签'
+  url = '/tags/'
+  weight = 20
+
+[[menu.after]]
+  name = '关于'
+  url = '/about/'
+  weight = 30
+
+[[menu.after]]
+  name = 'GitHub'
+  url = 'https://github.com/htten/hugo-blog'
+  weight = 40

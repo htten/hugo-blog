@@ -34,6 +34,9 @@ jobs:
       - name: Build
         run: hugo --minify --gc -b "${{ env.BASEURL }}"
 
+      - name: Check internal links
+        run: python3 scripts/check-links.py public
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:

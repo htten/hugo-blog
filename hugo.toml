@@ -1,0 +1,12 @@
+baseURL = 'https://blog.htten.cc.cd/'
+languageCode = 'zh-cn'
+title = '我的博客'
+contentDir = 'content'
+defaultContentLanguage = 'zh-cn'
+theme = 'terminal'
+
+[params]
+  themeVersion = 'v4.2.6'
+  mainSections = ['posts']
+  disableThemeToggle = true
+  disableScrollToTop = false

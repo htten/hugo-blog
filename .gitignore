@@ -1,0 +1,10 @@
+/public/
+.hugo_build.lock
+
+# 本地构建产物
+/resources/
+/public/
+.hugo_build.lock
+
+# 私有配置
+.env

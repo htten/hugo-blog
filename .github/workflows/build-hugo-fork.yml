@@ -1,0 +1,39 @@
+name: Build forked Hugo
+
+# 从你自己的 hugo fork 编译 extended 版本，作为 Pages 构建的可选二进制。
+# 使用方法：在仓库 Settings → Secrets/Variables 里设置变量 FORK_REPO = 你的用户名/hugo
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      FORK_REPO: ${{ vars.FORK_REPO || 'gohugoio/hugo' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.FORK_REPO }}
+          path: hugo-src
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+
+      - name: Build extended
+        working-directory: hugo-src
+        run: |
+          mkdir -p out
+          go build -tags extended -o out/hugo .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hugo-extended
+          path: hugo-src/out/hugo

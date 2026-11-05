@@ -1,11 +1,12 @@
 baseURL = 'https://blog.htten.cc.cd/'
 languageCode = 'zh-cn'
-title = '我的博客'
+title = 'HTTEN 的博客'
 contentDir = 'content'
 defaultContentLanguage = 'zh-cn'
 theme = 'terminal'
 
 [params]
+  description = 'AI 应用、开发者工具、生产力哲学'
   themeVersion = 'v4.2.6'
   mainSections = ['posts']
   disableThemeToggle = true

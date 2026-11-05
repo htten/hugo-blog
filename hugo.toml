@@ -37,7 +37,7 @@ copyright = '© 2026 HTTEN · Powered by Hugo'
     startLevel = 2
     endLevel = 3
   [markup.highlight]
-    style = 'base16-snazzy'
+    style = 'github'
 
 [params]
   description = 'AI 应用、开发者工具、生产力哲学'

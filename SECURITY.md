@@ -12,7 +12,7 @@
 | 项 | 状态 |
 | --- | --- |
 | GitHub Actions 依赖锁定 commit SHA | ✅ `deploy.yml` / `build-hugo-fork.yml` |
-| main 分支保护（禁 force push / 禁删分支 / 强制线性历史 / 对管理员生效） | ✅ |
+| main 分支保护（禁 force push / 禁删分支 / 强制线性历史） | ✅ `enforce_admins=false`（见下方说明） |
 | Secret scanning + Push protection | ✅（GitHub 已启用） |
 | Dependabot 漏洞告警 + 自动安全修复 | ✅ |
 | 仓库历史敏感信息扫描（无凭据/私钥/密钥文件） | ✅ 已扫描 |
@@ -21,6 +21,8 @@
 
 > 分支保护**未**强制 PR 与 required status checks：写文章需要直接 push 到 main。
 > 如需更严格，可用 PR 流程并把 `build` job 加为 required check（届时直接 push 会被拒绝）。
+>
+> **`enforce_admins` 保持 false**：实测开启后，GitHub Pages 的部署（由 `github-actions[bot]` 以管理员身份创建 environment deployment）会被判定为受保护分支违规，导致部署被取消、站点无法更新。
 
 ## 残余风险与待办
 
@@ -30,6 +32,14 @@
 4. **账号 2FA**：未检测到已启用。建议立即在 GitHub 开启 2FA 并保存恢复码——账号失陷等于域名与全部仓库失陷。
 5. **凭据卫生**：本地 `D:\phpblog\.db_credentials`、`D:\dsh\.env`（微云 Key）含明文口令/密钥，**不要复制进任何仓库**；`gh` 的 OAuth token 权限为 repo+workflow，泄露即可推全部仓库，建议定期 `gh auth refresh` 轮换。
 6. **构建链**：`deploy.yml` 从 GitHub Releases 下载固定版本 `hugo_extended_0.154.5_linux-amd64.deb`，可进一步增加 sha256 校验。
+
+## 已踩过的坑（排障记录）
+
+| 现象 | 原因 | 处理 |
+| --- | --- | --- |
+| push 被拒：`remote rejected ... (Internal Server Error)` / `fatal error in commit_refs` | GitHub 侧瞬时故障（新建仓库/分支保护切换期间） | 等待片刻重推；新建仓库验证即恢复 |
+| push 被拒：`protected branch hook declined` | 保护规则含 `required_status_checks`，直接 push 到 main 被拦截 | 去掉 status check 要求（改用 PR 流程时再加回） |
+| CI build 成功但 deploy 卡在 `in_progress` 十分钟后报 `Deployment cancelled` | `github-pages` environment 的自定义分支策略状态异常（曾手工删/建过 policy） | `DELETE /repos/{owner}/{repo}/environments/github-pages` 删除 environment 后重跑，GitHub 会自动重建 |
 
 ## 应急操作
 

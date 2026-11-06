@@ -18,7 +18,7 @@ date: 2026-11-05
 
 | 项 | 选择 |
 | --- | --- |
-| 静态站生成 | Hugo（extended，模板为本站自写） |
+| 静态站生成 | Hugo（extended，主题 `themes/blog/`，由 `hugo new theme` 生成） |
 | 托管 | GitHub Pages + GitHub Actions 自动发布 |
 | 域名 | `htten.cc.cd` |
 | HTTPS | Let's Encrypt（GitHub Pages 自动签发与续期） |

@@ -2,9 +2,9 @@
 
 从原自研 PHP 博客迁移到 Hugo 静态站。
 
-**样式 = 原 PHP 博客的 Hallmark·Editorial 设计**：暖纸色底（oklch 97%）、琥珀强调色（oklch 55% .18 35）、衬线大标题、单栏正文 + 右侧 280px 侧栏、发丝级分隔线、卡片淡入动画。CSS 沿用原 PHP 博客的样式表（已并入 `static/css/style.css` 并追加 Hugo 扩展），模板为本站自写（`layouts/`），**不依赖任何第三方主题**。
+**主题 = `themes/blog/`**：由 `hugo new theme blog` 生成的 Hugo 官方脚手架主题（含 `layouts/` 模板与 `assets/css/main.css` 极简样式），非第三方主题。导航菜单在 `hugo.toml` 的 `[menus]` 中配置。
 
-- 站点名：我的博客
+- 站点名：HTTEN 的博客
 - 域名：`https://htten.cc.cd/`（GitHub Pages + 自建 nginx 双轨）
 - 原 PHP 版本已归档（含部署文档与数据库导出）
 
@@ -13,14 +13,14 @@
 | 路径 | 说明 |
 | --- | --- |
 | `content/posts/` | 文章（Markdown，front matter 用 `title` / `date` / `description` / `categories` / `tags`） |
-| `layouts/` | 覆盖主题的模板（首页、文章列表） |
-| `static/css/style.css` | 全站样式（复刻 PHP 博客，追加表格/目录/归档列表等 Hugo 扩展） |
-| `layouts/_default/baseof.html` | 页面骨架：header / main / footer |
-| `layouts/_default/list.html` | 首页与列表页（Hero + 文章卡片 + 分页） |
-| `layouts/_default/single.html` | 文章页（标题 + 正文 + 标签 + 上一篇/下一篇） |
-| `layouts/_default/terms.html` | 分类/标签总览页 |
-| `layouts/partials/` | header / footer / sidebar / post-card / pagination |
-| `static/uploads/` | 从 PHP 博客迁移的图片 |
+| `themes/blog/` | Hugo 官方脚手架主题（`hugo new theme blog` 生成）：`layouts/`、`assets/css/main.css`、`assets/js/main.js`、`static/favicon.ico` |
+| `themes/blog/layouts/baseof.html` | 页面骨架：header / main / footer |
+| `themes/blog/layouts/home.html` | 首页（站点标题 + 文章列表） |
+| `themes/blog/layouts/page.html` | 单页（标题 + 日期 + 正文 + 标签） |
+| `themes/blog/layouts/section.html` | 列表页（如 `/posts/`） |
+| `themes/blog/layouts/taxonomy.html`、`term.html` | 分类/标签总览与词条页 |
+| `themes/blog/layouts/_partials/` | head / header / footer / menu / terms |
+| `static/` | CNAME、robots.txt |
 | `deploy/nginx.conf` | 自部署用 nginx 站点配置 |
 | `deploy/deploy-wsl.sh` | WSL 上构建 + 发布到 `/var/www/blog/public` + reload nginx |
 | `scripts/fork-hugo.sh` | fork gohugoio/hugo 并本地编译 extended 版 |
@@ -78,13 +78,12 @@ GitHub Pages 仓库设置中 Pages → Custom domain = `htten.cc.cd`，HTTPS 已
 
 ## 踩坑记录
 
-- **不要在 `content/categories/`、`content/tags/` 下放 term 页面**：Hugo 会把 taxonomy 收集清空（实测 `site.Taxonomies` 变成 0 项，侧栏全空）。当前做法是**从文章 front matter 直接聚合分类/标签**，保留原始大小写（`AI 工程`、`LLM`、`ReAct`），链接用 `lower (urlize)` 与 Hugo 的小写 term 路径对齐。
-- **CSS 动画会影响截图**：`.post-card` 有 `fadeUp` 动画，headless 截图需加 `--virtual-time-budget=4000`，否则拍到 opacity 0 的空白。
+- **不要在 `content/categories/`、`content/tags/` 下放 term 页面**：Hugo 会把 taxonomy 收集清空（实测 `site.Taxonomies` 变成 0 项）。分类/标签直接从文章 front matter 聚合。
+- **首页会列出正文全文**：`home.html` 用 `{{ .Summary }}`，文章没有 `<!--more-->` 摘要分隔符时 `.Summary` 等于全文，首页会很长。需要短摘要就在文章里加 `<!--more-->`。
+- **主题样式极简**：`hugo new theme` 生成的 `assets/css/main.css` 只有基础排版（max-width 768px、无配色体系），需要时自行扩展。
 
-## 迁移内容
+## 内容
 
-- `content/posts/hello-world.md` — 原 Hugo 站首篇
-- `content/posts/welcome-to-my-blog.md` — 从 PHP 博客 `posts` 表导入的首篇文章
-- `static/uploads/6ab77dda13c13.png` — 原 PHP 博客首图
-
-
+- `content/posts/ai-agent-engineering-reliability.md`
+- `content/posts/llm-internals-and-inference-engine.md`
+- `content/about.md`

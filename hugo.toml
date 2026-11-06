@@ -4,8 +4,9 @@ title = 'HTTEN 的博客'
 enableGitInfo = true
 disablePathToLower = false
 copyright = '© 2026 HTTEN · Powered by Hugo'
+theme = 'blog'
 
-# 无第三方主题：样式复刻自原 PHP 博客（Hallmark · Editorial），模板在 layouts/
+# 主题：hugo new theme blog（Hugo 官方脚手架生成），模板在 themes/blog/
 [languages]
   [languages.zh]
     languageName = '中文'
@@ -46,3 +47,24 @@ copyright = '© 2026 HTTEN · Powered by Hugo'
   description = 'AI 应用、开发者工具、生产力哲学'
   author = 'HTTEN'
   repo = 'https://github.com/htten/hugo-blog'
+
+[menus]
+  [[menus.main]]
+    name = '首页'
+    pageRef = '/'
+    weight = 10
+
+  [[menus.main]]
+    name = '文章'
+    pageRef = '/posts/'
+    weight = 20
+
+  [[menus.main]]
+    name = '关于'
+    pageRef = '/about/'
+    weight = 30
+
+  [[menus.main]]
+    name = '标签'
+    pageRef = '/tags/'
+    weight = 40

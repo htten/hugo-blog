@@ -1,0 +1,34 @@
+{{- /*
+Renders pagination for a Hugo Pager object.
+
+@context {page} pag The pager object.
+
+@example: {{ partial "pagination.html" $pag }}
+*/}}
+
+{{- $pag := . }}
+{{- if gt $pag.TotalPages 1 }}
+  <nav class="pagination" aria-label="分页">
+    <ul>
+      {{- if $pag.HasPrev }}
+        <li><a href="{{ $pag.Prev.URL }}" rel="prev">上一页</a></li>
+      {{- else }}
+        <li><span class="disabled">上一页</span></li>
+      {{- end }}
+      {{- range $pag.Pagers }}
+        <li>
+          {{- if eq .PageNumber $pag.PageNumber }}
+            <span class="active" aria-current="page">{{ .PageNumber }}</span>
+          {{- else }}
+            <a href="{{ .URL }}">{{ .PageNumber }}</a>
+          {{- end }}
+        </li>
+      {{- end }}
+      {{- if $pag.HasNext }}
+        <li><a href="{{ $pag.Next.URL }}" rel="next">下一页</a></li>
+      {{- else }}
+        <li><span class="disabled">下一页</span></li>
+      {{- end }}
+    </ul>
+  </nav>
+{{- end }}

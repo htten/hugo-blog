@@ -1,1 +1,7 @@
-<p>Copyright {{ now.Year }}. All rights reserved.</p>
+<div class="footer-inner">
+  <p>{{ site.Copyright | safeHTML }}</p>
+  <p class="footer-links">
+    {{ with site.Params.repo }}<a href="{{ . }}" rel="noopener noreferrer">GitHub</a>{{ end }}
+    <a href="{{ "/index.xml" | relURL }}">RSS</a>
+  </p>
+</div>

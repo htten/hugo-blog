@@ -1,9 +1,27 @@
 {{ define "main" }}
-  {{ .Content }}
-  {{ range where site.RegularPages "Section" "posts" }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-      {{ .Summary }}
-    </section>
-  {{ end }}
+  <section class="hero">
+    <h1 class="hero-title">{{ site.Title }}</h1>
+    {{ with site.Params.description }}<p class="hero-desc">{{ . }}</p>{{ end }}
+  </section>
+
+  {{ $pag := .Paginate (where site.RegularPages "Section" "posts") }}
+  <div class="post-list">
+    {{ range $pag.Pages }}
+      <article class="post-card">
+        <h2 class="post-card-title"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+        <div class="post-meta">
+          <time datetime="{{ .Date | time.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date | time.Format "2006年1月2日" }}</time>
+          {{ with .ReadingTime }}<span class="meta-sep">·</span><span>{{ . }} 分钟阅读</span>{{ end }}
+        </div>
+        {{ $summary := .Summary | replaceRE "</(h[1-6]|p|div|li|pre|blockquote|tr|ul|ol|table)>" " " | plainify | truncate 220 }}
+        <p class="post-summary">{{ $summary }}</p>
+        {{ with .GetTerms "tags" }}
+          <ul class="tag-list">
+            {{ range . }}<li><a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>{{ end }}
+          </ul>
+        {{ end }}
+      </article>
+    {{ end }}
+  </div>
+  {{ partial "pagination.html" $pag }}
 {{ end }}

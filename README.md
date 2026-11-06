@@ -2,7 +2,7 @@
 
 从原自研 PHP 博客迁移到 Hugo 静态站。
 
-**主题 = `themes/blog/`**：由 `hugo new theme blog` 生成的 Hugo 官方脚手架主题（含 `layouts/` 模板与 `assets/css/main.css` 极简样式），非第三方主题。导航菜单在 `hugo.toml` 的 `[menus]` 中配置。
+**主题 = `themes/blog/`**：以 `hugo new theme blog` 官方脚手架为骨架、自行重写样式与模板的定制主题（内容居中、宽幅、支持明暗切换），非第三方主题。导航菜单在 `hugo.toml` 的 `[menus]` 中配置。
 
 - 站点名：HTTEN 的博客
 - 域名：`https://htten.cc.cd/`（GitHub Pages + 自建 nginx 双轨）
@@ -13,13 +13,13 @@
 | 路径 | 说明 |
 | --- | --- |
 | `content/posts/` | 文章（Markdown，front matter 用 `title` / `date` / `description` / `categories` / `tags`） |
-| `themes/blog/` | Hugo 官方脚手架主题（`hugo new theme blog` 生成）：`layouts/`、`assets/css/main.css`、`assets/js/main.js`、`static/favicon.ico` |
+| `themes/blog/` | 定制主题（基于 `hugo new theme blog` 脚手架重写）：`layouts/`、`assets/css/main.css`（约 660 行）、`assets/js/main.js`、`static/favicon.ico` |
 | `themes/blog/layouts/baseof.html` | 页面骨架：header / main / footer |
 | `themes/blog/layouts/home.html` | 首页（站点标题 + 文章列表） |
 | `themes/blog/layouts/page.html` | 单页（标题 + 日期 + 正文 + 标签） |
 | `themes/blog/layouts/section.html` | 列表页（如 `/posts/`） |
 | `themes/blog/layouts/taxonomy.html`、`term.html` | 分类/标签总览与词条页 |
-| `themes/blog/layouts/_partials/` | head / header / footer / menu / terms |
+| `themes/blog/layouts/_partials/` | head / head/css / head/js / header / footer / menu / terms / pagination |
 | `static/` | CNAME、robots.txt |
 | `deploy/nginx.conf` | 自部署用 nginx 站点配置 |
 | `deploy/deploy-wsl.sh` | WSL 上构建 + 发布到 `/var/www/blog/public` + reload nginx |
@@ -79,8 +79,9 @@ GitHub Pages 仓库设置中 Pages → Custom domain = `htten.cc.cd`，HTTPS 已
 ## 踩坑记录
 
 - **不要在 `content/categories/`、`content/tags/` 下放 term 页面**：Hugo 会把 taxonomy 收集清空（实测 `site.Taxonomies` 变成 0 项）。分类/标签直接从文章 front matter 聚合。
-- **首页会列出正文全文**：`home.html` 用 `{{ .Summary }}`，文章没有 `<!--more-->` 摘要分隔符时 `.Summary` 等于全文，首页会很长。需要短摘要就在文章里加 `<!--more-->`。
-- **主题样式极简**：`hugo new theme` 生成的 `assets/css/main.css` 只有基础排版（max-width 768px、无配色体系），需要时自行扩展。
+- **中文摘要必须手动截断**：Hugo 按空白分词统计 `summaryLength`，中文没空格 → 整篇算 1 个词，`.Summary` 会返回全文（首页会爆炸）。主题模板已用 `replaceRE` + `plainify` + `truncate 220` 兜底；要精确控制可在文章里加 `<!--more-->`。
+- **主题样式已定制**：`assets/css/main.css` 含设计变量（`--maxw:1240px`、`--contentw:1000px`）、明暗双主题（`<html data-theme>` + localStorage）、吸顶磨砂头部、文章卡片、代码块/表格/TOC 排版、响应式与 `prefers-reduced-motion` 适配。
+- **锚点偏移**：`assets/js/main.js` 会把吸顶头部的实际高度写入 `--header-h`，供 `scroll-margin-top` 使用；改头部结构后无需手调数值。
 
 ## 内容
 

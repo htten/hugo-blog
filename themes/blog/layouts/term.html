@@ -1,7 +1,22 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+  </header>
   {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  {{ end }}
+
+  {{ $pag := .Paginate .Pages }}
+  <div class="post-list">
+    {{ range $pag.Pages }}
+      <article class="post-card">
+        <h2 class="post-card-title"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+        <div class="post-meta">
+          <time datetime="{{ .Date | time.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date | time.Format "2006年1月2日" }}</time>
+          {{ with .ReadingTime }}<span class="meta-sep">·</span><span>{{ . }} 分钟阅读</span>{{ end }}
+        </div>
+        {{ $summary := .Summary | replaceRE "</(h[1-6]|p|div|li|pre|blockquote|tr|ul|ol|table)>" " " | plainify | truncate 220 }}
+        <p class="post-summary">{{ $summary }}</p>
+      </article>
+    {{ end }}
+  </div>
+  {{ partial "pagination.html" $pag }}
 {{ end }}

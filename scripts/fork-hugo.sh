@@ -2,16 +2,15 @@
 # 从 GitHub fork gohugoio/hugo 并在本地编译（extended 版本，支持 SCSS）。
 #
 # 前提：已配置 GitHub 凭据（gh auth login 或 ~/.git-credentials）。
-# 网络：本机直连 github.com 超时，统一走 gh-proxy 镜像（git config --global url."https://gh-proxy.com/https://github.com/".insteadOf "https://github.com/"）
+# 网络：默认直连 github.com；如需镜像加速，请设置 GITHUB_UPSTREAM 或在本地 git 配置 insteadOf
 #
 # 用法：bash scripts/fork-hugo.sh [目标目录]
 set -euo pipefail
 
 SRC_REPO="gohugoio/hugo"
-UPSTREAM="https://gh-proxy.com/https://github.com/${SRC_REPO}.git"
+UPSTREAM="${GITHUB_UPSTREAM:-https://github.com/${SRC_REPO}.git}"
 WORKDIR="${1:-$HOME/src/hugo}"
 BIN_DIR="${BIN_DIR:-$HOME/bin}"
-VERSION="${HUGO_VERSION:-0.154.5}"
 
 echo "==> 克隆 $SRC_REPO -> $WORKDIR"
 mkdir -p "$(dirname "$WORKDIR")"
@@ -33,8 +32,8 @@ if [ -z "$FORK_REPO" ]; then
   FORK_REPO="$(gh api user -q .login)/hugo"
 fi
 echo "fork: $FORK_REPO"
-git remote add fork "https://gh-proxy.com/https://github.com/${FORK_REPO}.git" 2>/dev/null || \
-  git remote set-url fork "https://gh-proxy.com/https://github.com/${FORK_REPO}.git"
+git remote add fork "https://github.com/${FORK_REPO}.git" 2>/dev/null || \
+  git remote set-url fork "https://github.com/${FORK_REPO}.git"
 
 echo "==> 编译 extended 版本 (go build)"
 git fetch --tags --depth=1 origin

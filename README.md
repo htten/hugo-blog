@@ -2,11 +2,11 @@
 
 从原自研 PHP 博客迁移到 Hugo 静态站。
 
-**样式 = 原 PHP 博客的 Hallmark·Editorial 设计**：暖纸色底（oklch 97%）、琥珀强调色（oklch 55% .18 35）、衬线大标题、单栏正文 + 右侧 280px 侧栏、发丝级分隔线、卡片淡入动画。CSS 直接沿用 `D:\phpblog\assets\css\style.css`（复制到 `static/css/style.css` 并追加 Hugo 扩展），模板为本站自写（`layouts/`），**不依赖任何第三方主题**。
+**样式 = 原 PHP 博客的 Hallmark·Editorial 设计**：暖纸色底（oklch 97%）、琥珀强调色（oklch 55% .18 35）、衬线大标题、单栏正文 + 右侧 280px 侧栏、发丝级分隔线、卡片淡入动画。CSS 沿用原 PHP 博客的样式表（已并入 `static/css/style.css` 并追加 Hugo 扩展），模板为本站自写（`layouts/`），**不依赖任何第三方主题**。
 
 - 站点名：我的博客
 - 域名：`https://htten.cc.cd/`（GitHub Pages + 自建 nginx 双轨）
-- 原 PHP 版本已归档在 `D:\phpblog`（含 `DEPLOY.md`、数据库导出 `blog-export-20261002/blog.sql`）
+- 原 PHP 版本已归档（含部署文档与数据库导出）
 
 ## 目录
 
@@ -60,7 +60,7 @@ bash deploy/deploy-wsl.sh
 2. 在 `.github/workflows/deploy.yml` 里确认 `BASEURL` 与实际域名一致。
 3. 推送 `master`/`main` 即自动构建发布。
 
-## DNS 配置（DNSPod / DNSHE）
+## DNS 配置
 
 | 类型 | 主机记录 | 记录值 | 状态 |
 | --- | --- | --- | --- |
@@ -68,19 +68,13 @@ bash deploy/deploy-wsl.sh
 | A | `@` | `185.199.109.153` | ✅ 已生效 |
 | A | `@` | `185.199.110.153` | ✅ 已生效 |
 | A | `@` | `185.199.111.153` | ✅ 已生效 |
-| CNAME | `www` | `htten.github.io` | 可选（当前 www 仍指向旧地址 171.107.33.243） |
+| CNAME | `www` | `htten.github.io` | 可选 |
 
 GitHub Pages 仓库设置中 Pages → Custom domain = `htten.cc.cd`，HTTPS 已由 GitHub 自动签发。
 
 ## 网络说明
 
-本机（WSL 与 Windows）直连 `github.com` 会超时，Git 操作需走镜像：
-
-```bash
-git config --global url."https://gh-proxy.com/https://github.com/".insteadOf "https://github.com/"
-```
-
-`api.github.com` 可直连，`gh` CLI 的 API 操作不受影响。
+部分网络环境下 `github.com` 直连可能不稳定，Git 操作可按需配置代理或镜像；`api.github.com` 通常可直连，`gh` CLI 的 API 操作不受影响。
 
 ## 踩坑记录
 

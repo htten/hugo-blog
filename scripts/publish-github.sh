@@ -2,7 +2,7 @@
 # 一键把本地仓库发布到 GitHub：创建远端仓库（可选）+ fork hugo + 推送本仓库。
 #
 # 依赖：gh 已登录（gh auth login），或设置 GITHUB_TOKEN
-# 网络：pull 走 gh-proxy 镜像，push 走 SSH（git@github.com）
+# 网络：push 走 SSH（git@github.com）；pull 如需镜像加速，请在本地 git 配置 insteadOf
 #
 # 用法：bash scripts/publish-github.sh <github-user> [repo-name]
 set -euo pipefail
@@ -10,8 +10,7 @@ set -euo pipefail
 USER_="${1:?用法: publish-github.sh <github-user> [repo-name]}"
 REPO="${2:-blog}"
 SITE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-HUGO_DIR="${HUGO_DIR:-/mnt/d/src/hugo}"
-MIRROR="https://gh-proxy.com/https://github.com"
+HUGO_DIR="${HUGO_DIR:-$HOME/src/hugo}"
 
 command -v gh >/dev/null || { echo "缺少 gh CLI" >&2; exit 2; }
 gh auth status >/dev/null 2>&1 || { echo "gh 未登录：请执行 gh auth login" >&2; exit 3; }

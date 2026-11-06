@@ -9,10 +9,10 @@ BASE_URL="${1:-https://htten.cc.cd/}"
 
 command -v hugo >/dev/null || { echo "hugo 未安装" >&2; exit 1; }
 
-# 主题 hugo-book 需要 Hugo >= 0.158；系统 apt 版可能过旧，优先用自编译版本
+# 需要 Hugo >= 0.158；系统 apt 版可能过旧，优先用自编译版本
 pick_hugo() {
   local v major minor
-  for c in "${HUGO_BIN:-}" hugo /mnt/d/src/bin/hugo; do
+  for c in "${HUGO_BIN:-}" hugo "$HOME/bin/hugo"; do
     [ -n "$c" ] || continue
     v=$("$c" version 2>/dev/null | grep -oE "v[0-9]+\.[0-9]+" | head -1)
     [ -n "$v" ] || continue

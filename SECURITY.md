@@ -1,55 +1,70 @@
-# 安全说明（htten.cc.cd）
+# 安全策略（Security Policy）
 
-## 架构与攻击面
+## 项目概述
 
-- 纯静态站（Hugo → GitHub Pages），**无后端、无数据库、无登录态、无 Cookie**；
-- TLS 由 GitHub Pages 自动签发并续期（Let's Encrypt），Pages 已开启 **Enforce HTTPS**（HTTP → 301）；
-- CDN 为 GitHub 的 Fastly 边缘节点；
-- 主题 `panr/hugo-theme-terminal` v4.2.6 已 **vendor** 进仓库（不引用外部 CDN/字体/统计脚本），因此无第三方追踪、无外部 JS 供应链风险。
+本站是纯静态博客：Hugo 构建，GitHub Pages 托管。**无后端服务、无数据库、无用户账户、无 Cookie、无登录态、无表单与评论系统**，不采集任何访客数据。
+
+因此不存在服务端注入、越权、会话劫持一类攻击面；可报告的问题主要集中在静态资源引用与构建链。
+
+## 支持版本
+
+| 版本 | 是否接受报告 |
+| --- | --- |
+| `main` 分支（当前生产版本） | ✅ |
+| 历史提交、旧构建产物 | ❌ |
+
+## 如何报告漏洞
+
+优先使用 **GitHub 私有漏洞报告（Private Vulnerability Reporting）**：
+
+仓库页面 → **Security** → **Advisories** → **Report a vulnerability**。
+
+该功能未开启时，请发送邮件至 `htten@users.noreply.github.com`，标题注明 `[security]`。
+
+**请勿**开公开 issue，或在公开渠道讨论漏洞细节，直到维护者确认修复并发布。
+
+报告建议包含：
+
+- 问题描述与影响范围
+- 复现步骤（含具体 URL / 文件路径）
+- 可选的修复建议
+
+## 范围
+
+**在范围内**
+
+- 构建链与 CI 工作流的供应链风险（依赖版本、Action、构建脚本）
+- 站点引用的外部静态资源
+- 内容渲染导致的 XSS / 注入（Markdown、短代码、模板）
+- HTTPS / 证书配置问题
+
+**不在范围内**
+
+- GitHub Pages 平台自身（边缘节点、证书签发服务）
+- 第三方 DNS 与域名注册商
+- 无实际影响的理论性猜测
+- 社会工程、物理安全
 
 ## 已实施的安全措施
 
 | 项 | 状态 |
 | --- | --- |
-| GitHub Actions 依赖锁定 commit SHA | ✅ `deploy.yml` / `build-hugo-fork.yml` |
-| main 分支保护（禁 force push / 禁删分支 / 强制线性历史） | ✅ `enforce_admins=false`（见下方说明） |
-| Secret scanning + Push protection | ✅（GitHub 已启用） |
-| Dependabot 漏洞告警 + 自动安全修复 | ✅ |
-| 仓库历史敏感信息扫描（无凭据/私钥/密钥文件） | ✅ 已扫描 |
-| `gh` token 文件权限收紧为 600 | ✅ |
-| `.gitattributes` 统一换行符（消除 Windows/WSL 混用的文件模式风险） | ✅ |
+| CI 依赖锁定到 commit SHA | ✅ |
+| 分支保护（禁 force push、禁删分支） | ✅ |
+| Secret scanning + Push protection | ✅ |
+| Dependabot 漏洞告警 | ✅ |
+| 仓库历史敏感信息扫描 | ✅ |
+| 全站强制 HTTPS | ✅ |
 
-> 分支保护**未**强制 PR 与 required status checks：写文章需要直接 push 到 main。
-> 如需更严格，可用 PR 流程并把 `build` job 加为 required check（届时直接 push 会被拒绝）。
->
-> **`enforce_admins` 保持 false**：实测开启后，GitHub Pages 的部署（由 `github-actions[bot]` 以管理员身份创建 environment deployment）会被判定为受保护分支违规，导致部署被取消、站点无法更新。
+## 处理时效
 
-## 残余风险与待办
+| 阶段 | 时限 |
+| --- | --- |
+| 确认收到 | 3 个工作日 |
+| 初步评估 | 7 个工作日 |
+| 修复或给出结论 | 视严重程度，通常 30 天内 |
 
-1. **www 证书**：CNAME 已生效，但 GitHub 尚未为 `www.htten.cc.cd` 签发证书（当前返回默认 `*.github.io` 证书，浏览器会告警）。等待自动签发（通常 30~60 分钟，最长 24h）；若长期不签，删除 www 的 CNAME 记录，只保留 apex。
-2. **缺少自定义安全响应头**：GitHub Pages 不支持配置 HSTS / CSP / X-Frame-Options / X-Content-Type-Options。需要时用 Cloudflare 免费代理前置，或改为自建 nginx（参考 `deploy/nginx.conf`）。
-3. **域名续费风险**：`htten.cc.cd` 为 DNSHE 免费域名。若过期被他人重注册，现有 A 记录仍指向 GitHub Pages，将形成「悬空 DNS → 子域接管」。务必开启自动续费并设置到期提醒。
-4. **账号 2FA**：未检测到已启用。建议立即在 GitHub 开启 2FA 并保存恢复码——账号失陷等于域名与全部仓库失陷。
-5. **凭据卫生**：本地 `D:\phpblog\.db_credentials`、`D:\dsh\.env`（微云 Key）含明文口令/密钥，**不要复制进任何仓库**；`gh` 的 OAuth token 权限为 repo+workflow，泄露即可推全部仓库，建议定期 `gh auth refresh` 轮换。
-6. **构建链**：`deploy.yml` 从 GitHub Releases 下载固定版本 `hugo_extended_0.154.5_linux-amd64.deb`，可进一步增加 sha256 校验。
+## 已知边界
 
-## 已踩过的坑（排障记录）
-
-| 现象 | 原因 | 处理 |
-| --- | --- | --- |
-| push 被拒：`remote rejected ... (Internal Server Error)` / `fatal error in commit_refs` | GitHub 侧瞬时故障（新建仓库/分支保护切换期间） | 等待片刻重推；新建仓库验证即恢复 |
-| push 被拒：`protected branch hook declined` | 保护规则含 `required_status_checks`，直接 push 到 main 被拦截 | 去掉 status check 要求（改用 PR 流程时再加回） |
-| CI build 成功但 deploy 卡在 `in_progress` 十分钟后报 `Deployment cancelled` | `github-pages` environment 的自定义分支策略状态异常（曾手工删/建过 policy） | `DELETE /repos/{owner}/{repo}/environments/github-pages` 删除 environment 后重跑，GitHub 会自动重建 |
-
-## 应急操作
-
-```bash
-# 查看站点与证书
-openssl s_client -connect htten.cc.cd:443 -servername htten.cc.cd </dev/null | openssl x509 -noout -subject -dates
-
-# 本地发布（WSL）
-bash deploy/deploy-wsl.sh
-
-# 轮换 gh 凭据
-gh auth refresh -h github.com -s repo,workflow
-```
+- GitHub Pages 不支持自定义安全响应头（HSTS / CSP / X-Frame-Options 等）。如需更严格的头策略，需改用 Cloudflare 前置或自建反向代理。
+- 站点无用户数据，因此不存在数据泄露类风险。

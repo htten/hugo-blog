@@ -338,7 +338,7 @@ Agent 执行的命令默认应该：
   task: "查清 api-gateway 最近一小时的 timeout 报错是否集中在某台主机"
   assert:
     - agent_called: [search_logs]
-    - mentioned_host: "10.0.3.17"
+    - mentioned_host: "192.0.2.10"
     - no_false_claim: true
   max_steps: 12
   max_cost_usd: 0.05

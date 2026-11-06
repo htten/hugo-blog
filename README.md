@@ -2,7 +2,7 @@
 
 从原自研 PHP 博客迁移到 Hugo 静态站。
 
-**主题 = `themes/blog/`**：以 `hugo new theme blog` 官方脚手架为骨架、自行重写样式与模板的定制主题（内容居中、宽幅、导航置于右侧边栏、支持明暗切换），非第三方主题。导航菜单在 `hugo.toml` 的 `[menus]` 中配置。
+**主题 = `themes/blog/`**：以 `hugo new theme blog` 官方脚手架为骨架、自行重写样式与模板的定制主题（全屏铺满、正文列居中、导航置于右侧边栏、支持明暗切换），非第三方主题。导航菜单在 `hugo.toml` 的 `[menus]` 中配置。
 
 - 站点名：HTTEN 的博客
 - 域名：`https://htten.cc.cd/`（GitHub Pages + 自建 nginx 双轨）
@@ -80,9 +80,10 @@ GitHub Pages 仓库设置中 Pages → Custom domain = `htten.cc.cd`，HTTPS 已
 
 - **不要在 `content/categories/`、`content/tags/` 下放 term 页面**：Hugo 会把 taxonomy 收集清空（实测 `site.Taxonomies` 变成 0 项）。分类/标签直接从文章 front matter 聚合。
 - **中文摘要必须手动截断**：Hugo 按空白分词统计 `summaryLength`，中文没空格 → 整篇算 1 个词，`.Summary` 会返回全文（首页会爆炸）。主题模板已用 `replaceRE` + `plainify` + `truncate 220` 兜底；要精确控制可在文章里加 `<!--more-->`。
-- **主题样式已定制**：`assets/css/main.css` 含设计变量（`--maxw:1240px`、`--contentw:1000px`）、明暗双主题（`<html data-theme>` + localStorage）、吸顶磨砂头部、文章卡片、代码块/表格/TOC 排版、响应式与 `prefers-reduced-motion` 适配。
+- **主题样式已定制**：`assets/css/main.css` 含设计变量（`--contentw:1200px`）、明暗双主题（`<html data-theme>` + localStorage）、吸顶磨砂头部、文章卡片、代码块/表格/TOC 排版、响应式与 `prefers-reduced-motion` 适配。
 - **锚点偏移**：`assets/js/main.js` 会把吸顶头部的实际高度写入 `--header-h`，供 `scroll-margin-top` 使用；改头部结构后无需手调数值。脚本在 `<head>` 执行时 DOM 尚未就绪，`syncHeaderH()` 必须等 `DOMContentLoaded`。
 - **右侧边栏**：导航从页头移到 `baseof.html` 的 `.site-sidebar`（`.site-body` 内的 flex 右侧），sticky 停在 `--header-h`；≤900px 时改为顶部横向导航。
+- **全屏铺满**：`.site` 不再限制最大宽度（原 `--maxw` 已删除），正文列由 `.site-main` 的 `flex: 0 1 var(--contentw)`（1200px）约束，正文 + 侧边栏整组在屏内居中；页头/页脚内容同样限制在 `--contentw`。改宽度只需调 `--contentw`。
 
 ## 内容
 

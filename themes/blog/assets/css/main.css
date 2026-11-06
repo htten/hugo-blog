@@ -115,12 +115,35 @@ summary:focus-visible {
   flex-direction: column;
 }
 
-.site-main {
+/* 主体：正文 + 右侧边栏 */
+.site-body {
   flex: 1 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(28px, 4vw, 48px);
   width: 100%;
-  max-width: var(--contentw);
-  margin: 0 auto;
+}
+
+.site-main {
+  flex: 1 1 auto;
+  min-width: 0;
   padding: clamp(28px, 5vw, 56px) 0;
+}
+
+/* 右侧边栏 */
+.site-sidebar {
+  flex: 0 0 220px;
+  position: sticky;
+  top: var(--header-h);
+  padding: clamp(28px, 5vw, 56px) 0;
+}
+
+.sidebar-card {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
 }
 
 /* ---------- 4. 头部 ---------- */
@@ -163,20 +186,19 @@ summary:focus-visible {
   letter-spacing: .02em;
 }
 
-/* 导航 */
+/* 导航（右侧边栏内，竖排） */
 .site-nav ul {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2px;
+  flex-direction: column;
+  gap: 4px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 .site-nav a {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 999px;
+  display: block;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
   font-size: 15px;
   font-weight: 500;
   color: var(--text-soft);
@@ -632,6 +654,23 @@ summary:focus-visible {
 }
 
 /* ---------- 15. 响应式 ---------- */
+/* 窄屏：右侧边栏改为顶部横向导航 */
+@media (max-width: 900px) {
+  .site-body { flex-direction: column; }
+  .site-sidebar {
+    order: -1;
+    position: static;
+    flex: none;
+    width: 100%;
+    padding: 0 0 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-card { padding: 12px; }
+  .site-main { padding-top: 22px; }
+  .site-nav ul { flex-direction: row; flex-wrap: wrap; gap: 4px; }
+  .site-nav a { padding: 6px 12px; }
+}
+
 @media (max-width: 720px) {
   body { font-size: 16px; }
   .header-inner { gap: 10px; padding: 14px 0 12px; }

@@ -25,10 +25,17 @@ document.addEventListener('DOMContentLoaded', function () {
   sync()
 })
 
-// 同步吸顶头部实际高度，供锚点偏移（scroll-margin-top）使用
+// 同步吸顶头部实际高度，供锚点偏移（scroll-margin-top）使用。
+// 脚本被放在 <head>，执行时 DOM 尚未就绪，因此要等 DOMContentLoaded。
 function syncHeaderH() {
   var h = document.querySelector('.site-header')
   if (h) document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px')
 }
+
 window.addEventListener('resize', syncHeaderH)
-syncHeaderH()
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', syncHeaderH)
+} else {
+  syncHeaderH()
+}

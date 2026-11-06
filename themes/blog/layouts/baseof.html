@@ -9,9 +9,16 @@
     <header class="site-header">
       {{ partial "header.html" . }}
     </header>
-    <main id="main" class="site-main">
-      {{ block "main" . }}{{ end }}
-    </main>
+    <div class="site-body">
+      <main id="main" class="site-main">
+        {{ block "main" . }}{{ end }}
+      </main>
+      <aside class="site-sidebar" aria-label="站点导航">
+        <div class="sidebar-card">
+          {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+        </div>
+      </aside>
+    </div>
     <footer class="site-footer">
       {{ partial "footer.html" . }}
     </footer>

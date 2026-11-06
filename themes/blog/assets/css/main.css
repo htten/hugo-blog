@@ -535,7 +535,6 @@ summary:focus-visible {
   padding-bottom: 26px;
   margin-bottom: 34px;
   border-bottom: 1px solid var(--border);
-  text-align: center;
 }
 .page-header h1 {
   margin: 0;
@@ -545,7 +544,7 @@ summary:focus-visible {
   color: var(--text);
 }
 .page-header p {
-  margin: 10px auto 0;
+  margin: 10px 0 0;
   max-width: 640px;
   font-size: 16px;
   color: var(--muted);

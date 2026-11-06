@@ -84,6 +84,7 @@ GitHub Pages 仓库设置中 Pages → Custom domain = `htten.cc.cd`，HTTPS 已
 - **锚点偏移**：`assets/js/main.js` 会把吸顶头部的实际高度写入 `--header-h`，供 `scroll-margin-top` 使用；改头部结构后无需手调数值。脚本在 `<head>` 执行时 DOM 尚未就绪，`syncHeaderH()` 必须等 `DOMContentLoaded`。
 - **右侧边栏**：导航从页头移到 `baseof.html` 的 `.site-sidebar`（`.site-body` 内的 flex 右侧），sticky 停在 `--header-h`；≤900px 时改为顶部横向导航。
 - **全屏铺满**：`.site` 不再限制最大宽度（原 `--maxw` 已删除），正文列由 `.site-main` 的 `flex: 0 1 var(--contentw)`（1200px）约束，正文 + 侧边栏整组在屏内居中；页头/页脚内容同样限制在 `--contentw`。改宽度只需调 `--contentw`。
+- **列表页头部靠左**：`.page-header`（`/posts/`、`/tags/` 及各 term 页）不设 `text-align`，与 `.post-header`（`/about/`、文章详情）一致靠左；首页 `.hero` 仍居中。
 
 ## 内容
 

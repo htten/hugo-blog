@@ -1,8 +1,0 @@
-{{- /* LangBot 对话组件：配置见 hugo.toml 的 [params.langbot] */ -}}
-{{- with site.Params.langbot }}
-  {{- if .enabled }}
-    {{- $id := .id | default "05148c9a-5f7e-46e3-9618-7222733936ef" }}
-    {{- $title := .title | default "LangBot" }}
-<script data-title="{{ $title }}" src="https://cloud.langbot.app/api/v1/embed/{{ $id }}/widget.js"></script>
-  {{- end }}
-{{- end }}

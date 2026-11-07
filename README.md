@@ -86,8 +86,17 @@ GitHub Pages 仓库设置中 Pages → Custom domain = `htten.cc.cd`，HTTPS 已
 - **全屏铺满**：`.site` 不再限制最大宽度（原 `--maxw` 已删除），正文列由 `.site-main` 的 `flex: 0 1 var(--contentw)`（1200px）约束，正文 + 侧边栏整组在屏内居中；页头/页脚内容同样限制在 `--contentw`。改宽度只需调 `--contentw`。
 - **列表页头部靠左**：`.page-header`（`/posts/`、`/tags/` 及各 term 页）不设 `text-align`，与 `.post-header`（`/about/`、文章详情）一致靠左；首页 `.hero` 仍居中。
 
+## 每日自动发文
+
+- **触发**：DSH 桌面端每天 09:00（Asia/Shanghai）定时提醒，自动写稿并发布到 https://htten.cc.cd/。
+- **选题库**：`scripts/topic-queue.md`（42 个选题，覆盖 AI 应用 / 开发者工具 / 生产力哲学，按顺序发布）。
+- **发布手册**：`scripts/daily-publish.md`（前置检查 → 选题 → 事实核查 → 写作 → 本地校验 → push → 线上验证 → 更新队列）。
+- **本地校验**：`scripts/verify-post.sh <slug>`（front matter / 日期 / 正文 ≥300 行 / 标题唯一 / WSL Hugo 0.169.0 构建 / 内部链接）。
+- **依赖**：DSH Desktop 保持运行；WSL 里安装 Hugo 0.169.0（`~/.local/bin/hugo-0.169.0`，非 extended 即可，本站无 SCSS/WebP）；Git SSH 推送权限。
+
 ## 内容
 
 - `content/posts/ai-agent-engineering-reliability.md`
 - `content/posts/llm-internals-and-inference-engine.md`
+- `content/posts/rag-engineering-retrieval-rerank-eval.md`
 - `content/about.md`

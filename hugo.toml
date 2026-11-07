@@ -48,6 +48,12 @@ theme = 'blog'
   author = 'HTTEN'
   repo = 'https://github.com/htten/hugo-blog'
 
+  # LangBot 对话组件（站点级，所有页面右下角悬浮入口）
+  [params.langbot]
+    enabled = true
+    id = '05148c9a-5f7e-46e3-9618-7222733936ef'
+    title = 'LangBot'
+
 [menus]
   [[menus.main]]
     name = '首页'

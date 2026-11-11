@@ -105,6 +105,18 @@ DSH 定时提醒**绑定创建它的那个会话**，以宿主任久任务存在
 - **恢复办法**：在任意会话里执行 `schedule_create`（daily 09:00 / Asia/Shanghai，prompt指向本节流程），或在 GUI「自动化任务」里重建；重建后核对 `schedule_list` 与 `schedule.json`。
 - **避免复发**：不要归档承载提醒的会话（GUI 置顶不能阻止归档，归档会同时清掉置顶）。
 
+### 漏发看门狗（Windows 计划任务）
+
+每日 09:40 由 Windows 计划任务 `BlogDailyWatchdog` 兜底检查（比 09:00 的 DSH 提醒晚 40 分钟，留出写稿 + 构建 + 部署时间）：
+
+- **脚本**：`scripts/watchdog.ps1`（退出码 0 = 当天已发文；1 = 缺失并已告警）。
+- **检查项**：① `content/posts/` 是否存在 `date: <今天(Asia/Shanghai)>` 的文章；② `schedule.json` 里的每日提醒是否仍为 `active`。
+- **动作**：缺失时尝试拉起 `D:\Program Files\DSH Desktop\DSH Desktop.exe`（宿主启动后会补发最近一次错过的提醒时点），并弹出 Windows 气球告警；全程写日志 `logs/watchdog.log`。
+- **注册方式**：`Register-ScheduledTask`，daily 09:40，`-StartWhenAvailable`（机器关机时开机后补跑），`LogonType Interactive`。
+- **手动验证**：`powershell -File scripts/watchdog.ps1 -TestDate 2026-11-10`（强制按指定日期走告警路径）。
+
+> 看门狗只能发现并告警，不能自己写稿。如果提醒已被归档删除，需要按上一节的「恢复办法」重建。
+
 ## 内容
 
 - `content/posts/ai-agent-engineering-reliability.md`

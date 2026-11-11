@@ -94,6 +94,17 @@ GitHub Pages 仓库设置中 Pages → Custom domain = `htten.cc.cd`，HTTPS 已
 - **本地校验**：`scripts/verify-post.sh <slug>`（front matter / 日期 / 正文 ≥300 行 / 标题唯一 / WSL Hugo 0.169.0 构建 / 内部链接）。
 - **依赖**：DSH Desktop 保持运行；WSL 里安装 Hugo 0.169.0（`~/.local/bin/hugo-0.169.0`，非 extended 即可，本站无 SCSS/WebP）；Git SSH 推送权限。
 
+### 提醒的会话绑定与失效风险（重要）
+
+DSH 定时提醒**绑定创建它的那个会话**，以宿主任久任务存在
+`%APPDATA%\dsh-desktop\harness\storages\schedule.json`（domain `schedule` v1 / 表 `tasks`）。宿主重启不丢，但：
+
+- **归档会话 = 删除提醒**。归档仍有活动提醒的会话会被宿主拒绝；一旦选择「停止活动任务」完成归档，该会话的**全部**活动提醒被删除，取消归档也不会恢复。2026-11-08～11-11 连续 4 天没发文，就是因为承载提醒的会话 `session-c7300dc1-8352-44dd-97ed-51ee83a9adc4` 被归档。
+- **宿主必须运行**。09:00 时 DSH Desktop 未启动就不会触发；宿主重启后只补发**最近一次**错过的时点，所以当天稍晚打开仍会补发当天那篇。
+- **当前任务**：id `schedule-9c9b761c-fb4d-40fb-aba0-14abc505a37c`，daily 09:00:00 `Asia/Shanghai`，会话 `session-3578832c-21c1-4fff-81ec-af332bc307d7`。
+- **恢复办法**：在任意会话里执行 `schedule_create`（daily 09:00 / Asia/Shanghai，prompt指向本节流程），或在 GUI「自动化任务」里重建；重建后核对 `schedule_list` 与 `schedule.json`。
+- **避免复发**：不要归档承载提醒的会话（GUI 置顶不能阻止归档，归档会同时清掉置顶）。
+
 ## 内容
 
 - `content/posts/ai-agent-engineering-reliability.md`

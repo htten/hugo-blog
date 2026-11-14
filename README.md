@@ -125,4 +125,5 @@ DSH 定时提醒**绑定创建它的那个会话**，以宿主任久任务存在
 - `content/posts/context-engineering-for-llm-apps.md`
 - `content/posts/llm-finetuning-practice-lora-qlora.md`
 - `content/posts/multimodal-llm-applications-vlm.md`
+- `content/posts/ai-coding-assistant-architecture.md`
 - `content/about.md`

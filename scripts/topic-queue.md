@@ -14,7 +14,7 @@
 | 4 | published | 多模态大模型应用：视觉编码、VLM 推理与工程取舍 | AI 应用 | 多模态, VLM, 视觉编码, 推理 | multimodal-llm-applications-vlm | 2026-11-13 |
 | 5 | published | AI 编程助手的工作原理与工程化：补全、Agent 与上下文检索 | AI 应用 | AI 编程, Copilot, Agent, 上下文检索 | ai-coding-assistant-architecture | 2026-11-14 |
 | 6 | published | 大模型评测体系：Benchmark 陷阱、LLM-as-Judge 与人工评测 | AI 应用 | 评测, Benchmark, LLM-as-Judge, 数据污染, 人工标注 | llm-evaluation-system | 2026-11-16 |
-| 7 | pending | 结构化输出与函数调用：JSON Schema、工具编排与容错 | AI 应用 | 结构化输出, 函数调用, JSON Schema, 工具编排 | structured-output-function-calling | |
+| 7 | published | 结构化输出与函数调用：JSON Schema、工具编排与容错 | AI 应用 | 结构化输出, 函数调用, JSON Schema, 工具编排, 容错 | structured-output-function-calling | 2026-11-17 |
 | 8 | pending | 长上下文与记忆系统：RAG、长上下文与分层记忆 | AI 应用 | 长上下文, 记忆系统, RAG, 上下文压缩 | long-context-and-memory-systems | |
 | 9 | pending | AI 搜索与 Deep Research 系统设计 | AI 应用 | AI 搜索, Deep Research, 检索, 多步推理 | ai-search-deep-research-system | |
 | 10 | pending | 大模型安全工程：Prompt Injection、Guardrail 与红队 | AI 应用 | 大模型安全, Prompt Injection, Guardrail, 红队 | llm-security-prompt-injection-guardrails | |
@@ -55,6 +55,7 @@
 
 | 日期 | 标题 | slug | 分类 |
 | --- | --- | --- | --- |
+| 2026-11-17 | 结构化输出与函数调用：JSON Schema、工具编排与容错 | structured-output-function-calling | AI 应用 |
 | 2026-11-16 | 大模型评测体系：Benchmark 陷阱、LLM-as-Judge 与人工评测 | llm-evaluation-system | AI 应用 |
 | 2026-11-14 | AI 编程助手的工作原理与工程化：补全、Agent 与上下文检索 | ai-coding-assistant-architecture | AI 应用 |
 | 2026-11-13 | 多模态大模型应用：视觉编码、VLM 推理与工程取舍 | multimodal-llm-applications-vlm | AI 应用 |

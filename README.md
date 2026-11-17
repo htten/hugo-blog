@@ -104,6 +104,7 @@ DSH 定时提醒**绑定创建它的那个会话**，以宿主任久任务存在
 - **当前任务**：id `schedule-aa91b6ac-c609-4f5f-a8c3-b96f25152e28`，daily 09:00:00 `Asia/Shanghai`，会话 `session-73ebbe24-063c-452e-8763-933d3ecd2bca`（2026-11-16 重建）。
 - **恢复办法**：在任意会话里执行 `schedule_create`（daily 09:00 / Asia/Shanghai，prompt指向本节流程），或在 GUI「自动化任务」里重建；重建后核对 `schedule_list` 与 `schedule.json`。
 - **避免复发**：不要归档承载提醒的会话（GUI 置顶不能阻止归档，归档会同时清掉置顶）。
+- **2026-11-17 验证通过**：重建后的提醒在 2026-11-17 09:00 自动触发，当天文章《结构化输出与函数调用：JSON Schema、工具编排与容错》已自动发文上线；`schedule_list` 的 `scheduledAt` 已推进到 2026-11-18T01:00:00Z（= 11-18 09:00 Asia/Shanghai）。
 
 ### 漏发看门狗（Windows 计划任务）
 
@@ -127,4 +128,5 @@ DSH 定时提醒**绑定创建它的那个会话**，以宿主任久任务存在
 - `content/posts/multimodal-llm-applications-vlm.md`
 - `content/posts/ai-coding-assistant-architecture.md`
 - `content/posts/llm-evaluation-system.md`
+- `content/posts/structured-output-function-calling.md`
 - `content/about.md`

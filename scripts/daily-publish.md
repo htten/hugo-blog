@@ -89,5 +89,5 @@ git push origin main
 
 - **提醒绑定会话**：DSH 定时提醒绑定创建它的会话，存在 `%APPDATA%\dsh-desktop\harness\storages\schedule.json`。会话被归档会连同活动提醒一起删除（归档时选「停止活动任务」即触发），取消归档不恢复，必须在任意会话重新 `schedule_create`。
 - **宿主未运行**：09:00 时 DSH Desktop 没开就不触发；重启后宿主只补发最近一次错过的时点，所以当天稍晚打开仍会补发。
-- **手动补发**：直接按 0→8 步执行即可。`date:` 用**当天**日期（`verify-post.sh` 强制校验等于当天）；若要补历史日期，需显式说明并临时放宽该检查，且只补队列里 pending 的选题。
+- **手动补发**：直接按 0→8 步执行即可。`date:` 用**当天**日期（`verify-post.sh` 默认强制校验等于当天）；若要补历史日期，需用户显式说明，并用 `BLOG_EXPECT_DATE=<YYYY-MM-DD> bash scripts/verify-post.sh <slug>` 覆盖日期校验，且只补队列里 pending 的选题。不设该变量时行为与原来完全一致。
 - **队列耗尽**：42 个选题发完后停下向用户申请补充，不要自行编造。

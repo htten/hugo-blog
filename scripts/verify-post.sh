@@ -17,8 +17,9 @@ for key in title description date categories tags; do
 done
 
 DATE="$(grep '^date:' "$FILE" | head -1 | sed 's/^date: *//; s/"//g')"
-TODAY="$(TZ=Asia/Shanghai date +%F)"
-[ "$DATE" = "$TODAY" ] || { echo "❌ date=$DATE 不是今天 $TODAY"; exit 1; }
+# 默认强制 date = 今天（Asia/Shanghai）；补历史日期时用 BLOG_EXPECT_DATE 显式覆盖
+TODAY="${BLOG_EXPECT_DATE:-$(TZ=Asia/Shanghai date +%F)}"
+[ "$DATE" = "$TODAY" ] || { echo "❌ date=$DATE 不等于期望日期 $TODAY（补历史日期请设 BLOG_EXPECT_DATE）"; exit 1; }
 
 # 正文行数（不含 front matter）
 LINES="$(awk 'BEGIN{fm=0} /^---$/{fm++; next} fm>=2{n++} END{print n+0}' "$FILE")"

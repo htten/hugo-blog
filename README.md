@@ -129,4 +129,9 @@ DSH 定时提醒**绑定创建它的那个会话**，以宿主任久任务存在
 - `content/posts/ai-coding-assistant-architecture.md`
 - `content/posts/llm-evaluation-system.md`
 - `content/posts/structured-output-function-calling.md`
+- `content/posts/long-context-and-memory-systems.md`
+- `content/posts/ai-search-deep-research-system.md`
+- `content/posts/llm-security-prompt-injection-guardrails.md`
+- `content/posts/inference-cost-optimization-practice.md`
+- `content/posts/small-model-vs-large-model-routing.md`
 - `content/about.md`

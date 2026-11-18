@@ -15,11 +15,11 @@
 | 5 | published | AI 编程助手的工作原理与工程化：补全、Agent 与上下文检索 | AI 应用 | AI 编程, Copilot, Agent, 上下文检索 | ai-coding-assistant-architecture | 2026-11-14 |
 | 6 | published | 大模型评测体系：Benchmark 陷阱、LLM-as-Judge 与人工评测 | AI 应用 | 评测, Benchmark, LLM-as-Judge, 数据污染, 人工标注 | llm-evaluation-system | 2026-11-16 |
 | 7 | published | 结构化输出与函数调用：JSON Schema、工具编排与容错 | AI 应用 | 结构化输出, 函数调用, JSON Schema, 工具编排, 容错 | structured-output-function-calling | 2026-11-17 |
-| 8 | pending | 长上下文与记忆系统：RAG、长上下文与分层记忆 | AI 应用 | 长上下文, 记忆系统, RAG, 上下文压缩 | long-context-and-memory-systems | |
-| 9 | pending | AI 搜索与 Deep Research 系统设计 | AI 应用 | AI 搜索, Deep Research, 检索, 多步推理 | ai-search-deep-research-system | |
-| 10 | pending | 大模型安全工程：Prompt Injection、Guardrail 与红队 | AI 应用 | 大模型安全, Prompt Injection, Guardrail, 红队 | llm-security-prompt-injection-guardrails | |
-| 11 | pending | 推理成本优化实战：批处理、投机解码与模型路由 | AI 应用 | 推理优化, 批处理, 投机解码, 成本 | inference-cost-optimization-practice | |
-| 12 | pending | 小模型 vs 大模型：蒸馏、任务分解与模型路由 | AI 应用 | 模型路由, 蒸馏, 成本, 任务分解 | small-model-vs-large-model-routing | |
+| 8 | published | 长上下文与记忆系统：RAG、长上下文与分层记忆 | AI 应用 | 长上下文, 记忆系统, RAG, 上下文压缩 | long-context-and-memory-systems | 2026-11-08 |
+| 9 | published | AI 搜索与 Deep Research 系统设计 | AI 应用 | AI 搜索, Deep Research, 检索, 多步推理 | ai-search-deep-research-system | 2026-11-09 |
+| 10 | published | 大模型安全工程：Prompt Injection、Guardrail 与红队 | AI 应用 | 大模型安全, Prompt Injection, Guardrail, 红队 | llm-security-prompt-injection-guardrails | 2026-11-10 |
+| 11 | published | 推理成本优化实战：批处理、投机解码与模型路由 | AI 应用 | 推理优化, 批处理, 投机解码, 成本 | inference-cost-optimization-practice | 2026-11-15 |
+| 12 | published | 小模型 vs 大模型：蒸馏、任务分解与模型路由 | AI 应用 | 模型路由, 蒸馏, 成本, 任务分解 | small-model-vs-large-model-routing | 2026-11-18 |
 | 13 | pending | 向量数据库选型与工程：HNSW、混合检索与重排 | AI 应用 | 向量数据库, HNSW, 混合检索, 重排 | vector-database-selection-engineering | |
 | 14 | pending | AI 数据工程：清洗、去重、合成数据与数据飞轮 | AI 应用 | 数据工程, 合成数据, 数据质量 | ai-data-engineering-synthetic-data | |
 | 15 | pending | LLM 应用可靠性工程：重试、降级、幂等与限流 | AI 应用 | 可靠性, 重试, 降级, 限流 | llm-application-reliability-engineering | |
@@ -55,10 +55,15 @@
 
 | 日期 | 标题 | slug | 分类 |
 | --- | --- | --- | --- |
+| 2026-11-18 | 小模型 vs 大模型：蒸馏、任务分解与模型路由 | small-model-vs-large-model-routing | AI 应用 |
 | 2026-11-17 | 结构化输出与函数调用：JSON Schema、工具编排与容错 | structured-output-function-calling | AI 应用 |
 | 2026-11-16 | 大模型评测体系：Benchmark 陷阱、LLM-as-Judge 与人工评测 | llm-evaluation-system | AI 应用 |
+| 2026-11-15 | 推理成本优化实战：批处理、投机解码与模型路由 | inference-cost-optimization-practice | AI 应用 |
 | 2026-11-14 | AI 编程助手的工作原理与工程化：补全、Agent 与上下文检索 | ai-coding-assistant-architecture | AI 应用 |
 | 2026-11-13 | 多模态大模型应用：视觉编码、VLM 推理与工程取舍 | multimodal-llm-applications-vlm | AI 应用 |
 | 2026-11-12 | 大模型微调实战：LoRA/QLoRA、数据配比与评估 | llm-finetuning-practice-lora-qlora | AI 应用 |
 | 2026-11-11 | 从提示词工程到上下文工程：结构化输入、缓存与压缩 | context-engineering-for-llm-apps | AI 应用 |
+| 2026-11-10 | 大模型安全工程：Prompt Injection、Guardrail 与红队 | llm-security-prompt-injection-guardrails | AI 应用 |
+| 2026-11-09 | AI 搜索与 Deep Research 系统设计 | ai-search-deep-research-system | AI 应用 |
+| 2026-11-08 | 长上下文与记忆系统：RAG、长上下文与分层记忆 | long-context-and-memory-systems | AI 应用 |
 | 2026-11-07 | RAG 工程化：从向量检索到重排序与评估 | rag-engineering-retrieval-rerank-eval | AI 应用 |

@@ -101,10 +101,11 @@ DSH 定时提醒**绑定创建它的那个会话**，以宿主任久任务存在
 
 - **归档会话 = 删除提醒**。归档仍有活动提醒的会话会被宿主拒绝；一旦选择「停止活动任务」完成归档，该会话的**全部**活动提醒被删除，取消归档也不会恢复。2026-11-08～11-11 连续 4 天没发文，就是因为承载提醒的会话 `session-c7300dc1-8352-44dd-97ed-51ee83a9adc4` 被归档。同类问题 2026-11-15 再次发生（当天无 `date: 2026-11-15` 文章），11-16 已手动补发并重建提醒。
 - **宿主必须运行**。09:00 时 DSH Desktop 未启动就不会触发；宿主重启后只补发**最近一次**错过的时点，所以当天稍晚打开仍会补发当天那篇。
-- **当前任务**：id `schedule-aa91b6ac-c609-4f5f-a8c3-b96f25152e28`，daily 09:00:00 `Asia/Shanghai`，会话 `session-73ebbe24-063c-452e-8763-933d3ecd2bca`（2026-11-16 重建）。
+- **当前任务**：id `schedule-d82ea1ff-372a-4de8-bf9e-4cb4128d38c9`，daily 09:00:00 `Asia/Shanghai`，标题 `每日技术文章自动发布`（2026-11-19 重建）。
 - **恢复办法**：在任意会话里执行 `schedule_create`（daily 09:00 / Asia/Shanghai，prompt指向本节流程），或在 GUI「自动化任务」里重建；重建后核对 `schedule_list` 与 `schedule.json`。
 - **避免复发**：不要归档承载提醒的会话（GUI 置顶不能阻止归档，归档会同时清掉置顶）。
 - **2026-11-17 验证通过**：重建后的提醒在 2026-11-17 09:00 自动触发，当天文章《结构化输出与函数调用：JSON Schema、工具编排与容错》已自动发文上线；`schedule_list` 的 `scheduledAt` 已推进到 2026-11-18T01:00:00Z（= 11-18 09:00 Asia/Shanghai）。
+- **2026-11-19 再次失效并已恢复**：11-19 09:00 没有触发，09:40 看门狗报 `MISSING` + `WARN: DSH 定时提醒不存在或未激活（很可能随会话归档被删除）`。事后确认 `schedule.json` 的 `tasks` 表已被清空（文件 mtime = 2026-11-18 19:40），与「归档会话连带删除该会话全部活动提醒」的历史模式一致。同日 20:35 重建提醒（新 id 如上，`scheduledAt` = 2026-11-20T01:00:00Z），当天文章已手动补发上线。**待观察**：11-20 09:00 是否自动触发，若仍失效说明存在新的提醒删除路径（宿主侧非归档原因），需要进一步查宿主日志。
 
 ### 漏发看门狗（Windows 计划任务）
 
@@ -134,4 +135,5 @@ DSH 定时提醒**绑定创建它的那个会话**，以宿主任久任务存在
 - `content/posts/llm-security-prompt-injection-guardrails.md`
 - `content/posts/inference-cost-optimization-practice.md`
 - `content/posts/small-model-vs-large-model-routing.md`
+- `content/posts/vector-database-selection-engineering.md`
 - `content/about.md`

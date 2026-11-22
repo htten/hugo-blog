@@ -23,7 +23,7 @@
 | 13 | published | 向量数据库选型与工程：HNSW、混合检索与重排 | AI 应用 | 向量数据库, HNSW, 混合检索, 重排 | vector-database-selection-engineering | 2026-11-19 |
 | 14 | published | AI 数据工程：清洗、去重、合成数据与数据飞轮 | AI 应用 | 数据工程, 合成数据, 数据质量 | ai-data-engineering-synthetic-data | 2026-11-20 |
 | 15 | published | LLM 应用可靠性工程：重试、降级、幂等与限流 | AI 应用 | 可靠性, 重试, 降级, 限流 | llm-application-reliability-engineering | 2026-11-21 |
-| 16 | pending | 开发者命令行工具设计：交互、配置与插件体系 | 开发者工具 | CLI, 工具设计, 插件, 配置 | cli-tool-design-engineering | |
+| 16 | published | 开发者命令行工具设计：交互、配置与插件体系 | 开发者工具 | CLI, 工具设计, 插件, 配置 | cli-tool-design-engineering | 2026-11-22 |
 | 17 | pending | 代码编辑器架构：LSP、Tree-sitter 与增量解析 | 开发者工具 | 编辑器, LSP, Tree-sitter, 增量解析 | code-editor-architecture-lsp-tree-sitter | |
 | 18 | pending | Git 内部原理：对象模型、引用与并发控制 | 开发者工具 | Git, 对象模型, 引用, 并发控制 | git-internals-object-model | |
 | 19 | pending | 容器镜像与构建优化：分层缓存、多阶段与 BuildKit | 开发者工具 | 容器, 镜像构建, Docker, BuildKit | container-image-build-optimization | |
@@ -55,6 +55,7 @@
 
 | 日期 | 标题 | slug | 分类 |
 | --- | --- | --- | --- |
+| 2026-11-22 | 开发者命令行工具设计：交互、配置与插件体系 | cli-tool-design-engineering | 开发者工具 |
 | 2026-11-21 | LLM 应用可靠性工程：重试、降级、幂等与限流 | llm-application-reliability-engineering | AI 应用 |
 | 2026-11-20 | AI 数据工程：清洗、去重、合成数据与数据飞轮 | ai-data-engineering-synthetic-data | AI 应用 |
 | 2026-11-19 | 向量数据库选型与工程：HNSW、混合检索与重排 | vector-database-selection-engineering | AI 应用 |

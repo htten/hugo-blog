@@ -26,10 +26,10 @@
 | 16 | published | 开发者命令行工具设计：交互、配置与插件体系 | 开发者工具 | CLI, 工具设计, 插件, 配置 | cli-tool-design-engineering | 2026-11-22 |
 | 17 | published | 代码编辑器架构：LSP、Tree-sitter 与增量解析 | 开发者工具 | 编辑器, LSP, Tree-sitter, 增量解析 | code-editor-architecture-lsp-tree-sitter | 2026-11-23 |
 | 18 | published | Git 内部原理：对象模型、引用与并发控制 | 开发者工具 | Git, 对象模型, 引用, 并发控制 | git-internals-object-model | 2026-11-24 |
-| 19 | pending | 容器镜像与构建优化：分层缓存、多阶段与 BuildKit | 开发者工具 | 容器, 镜像构建, Docker, BuildKit | container-image-build-optimization | |
-| 20 | pending | CI/CD 流水线工程：可复现构建、缓存与测试分流 | 开发者工具 | CI/CD, 流水线, 缓存, 测试分流 | cicd-pipeline-engineering | |
-| 21 | pending | 可观测性工程：日志、指标、链路追踪与 eBPF | 开发者工具 | 可观测性, 日志, 指标, 链路追踪, eBPF | observability-engineering-logs-metrics-traces | |
-| 22 | pending | 性能剖析实战：火焰图、pprof、perf 与采样偏差 | 开发者工具 | 性能剖析, 火焰图, pprof, perf | performance-profiling-practice | |
+| 19 | published | 容器镜像与构建优化：分层缓存、多阶段与 BuildKit | 开发者工具 | 容器, 镜像构建, Docker, BuildKit | container-image-build-optimization | 2026-11-25 |
+| 20 | published | CI/CD 流水线工程：可复现构建、缓存与测试分流 | 开发者工具 | CI/CD, 流水线, 缓存, 测试分流 | cicd-pipeline-engineering | 2026-11-26 |
+| 21 | published | 可观测性工程：日志、指标、链路追踪与 eBPF | 开发者工具 | 可观测性, 日志, 指标, 链路追踪, eBPF | observability-engineering-logs-metrics-traces | 2026-11-27 |
+| 22 | published | 性能剖析实战：火焰图、pprof、perf 与采样偏差 | 开发者工具 | 性能剖析, 火焰图, pprof, perf | performance-profiling-practice | 2026-11-28 |
 | 23 | pending | 数据库查询优化：执行计划、索引与统计信息 | 开发者工具 | 数据库, 查询优化, 索引, 执行计划 | database-query-optimization | |
 | 24 | pending | 分布式系统一致性：Raft、时钟与 CAP 取舍 | 开发者工具 | 分布式系统, Raft, 一致性, CAP | distributed-systems-consistency-raft | |
 | 25 | pending | 网络编程与协议：TCP、QUIC 与 HTTP/2/3 | 开发者工具 | 网络编程, TCP, QUIC, HTTP | network-programming-protocols-tcp-quic | |
@@ -55,6 +55,10 @@
 
 | 日期 | 标题 | slug | 分类 |
 | --- | --- | --- | --- |
+| 2026-11-28 | 性能剖析实战：火焰图、pprof、perf 与采样偏差 | performance-profiling-practice | 开发者工具 |
+| 2026-11-27 | 可观测性工程：日志、指标、链路追踪与 eBPF | observability-engineering-logs-metrics-traces | 开发者工具 |
+| 2026-11-26 | CI/CD 流水线工程：可复现构建、缓存与测试分流 | cicd-pipeline-engineering | 开发者工具 |
+| 2026-11-25 | 容器镜像与构建优化：分层缓存、多阶段与 BuildKit | container-image-build-optimization | 开发者工具 |
 | 2026-11-24 | Git 内部原理：对象模型、引用与并发控制 | git-internals-object-model | 开发者工具 |
 | 2026-11-23 | 代码编辑器架构：LSP、Tree-sitter 与增量解析 | code-editor-architecture-lsp-tree-sitter | 开发者工具 |
 | 2026-11-22 | 开发者命令行工具设计：交互、配置与插件体系 | cli-tool-design-engineering | 开发者工具 |

@@ -136,4 +136,13 @@ DSH 定时提醒**绑定创建它的那个会话**，以宿主任久任务存在
 - `content/posts/inference-cost-optimization-practice.md`
 - `content/posts/small-model-vs-large-model-routing.md`
 - `content/posts/vector-database-selection-engineering.md`
+- `content/posts/ai-data-engineering-synthetic-data.md`
+- `content/posts/llm-application-reliability-engineering.md`
+- `content/posts/cli-tool-design-engineering.md`
+- `content/posts/code-editor-architecture-lsp-tree-sitter.md`
+- `content/posts/git-internals-object-model.md`
+- `content/posts/container-image-build-optimization.md`
+- `content/posts/cicd-pipeline-engineering.md`
+- `content/posts/observability-engineering-logs-metrics-traces.md`
+- `content/posts/performance-profiling-practice.md`
 - `content/about.md`
